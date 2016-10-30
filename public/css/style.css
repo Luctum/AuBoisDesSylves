@@ -1,0 +1,17 @@
+header{
+	padding-top: 25px;
+	padding-bottom: 25px;
+	background-image: url("../img/bg.png");
+	background-repeat: repeat-x repet-y;
+}
+nav{
+	margin-bottom: 20px;
+	background-repeat: repeat-x repet-y;
+}
+.top{
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.menu-categories{
+	color: black;
+}
