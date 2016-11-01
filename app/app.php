@@ -14,3 +14,7 @@ $app['dao.category'] = function ($app){
     return new AuBoisDesSylves\Models\DAO\CategoryDAO($app['db']);
 };
 
+$app['dao.user'] =  function ($app){
+    return new AuBoisDesSylves\Models\DAO\UserDAO($app['db']);
+};
+

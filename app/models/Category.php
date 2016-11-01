@@ -6,14 +6,8 @@ namespace AuBoisDesSylves\Models;
 class Category{
 
     //Name of the table in the database
-    public $tableName;
-
 	protected $id;
 	protected $name;
-
-    public function __construct(){
-        $this->tableName="category";
-    }
 
 	public function getId(){
 		return $this->id;

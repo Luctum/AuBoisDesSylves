@@ -8,7 +8,3 @@ $app->get('/', function () use ($app){
         return $home->index();
 });
 
-$app->get('/connect', function () use ($app){
-    $home = new HomeController($app);
-    return $home->index();
-});

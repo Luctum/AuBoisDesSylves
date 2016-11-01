@@ -10,7 +10,7 @@ class BaseController{
     }
 
     /* Add the content of "buffer" in the layout */
-    public function injectLayout($buffer){
+    protected function injectLayout($buffer){
         $categories = $this->app['dao.category']->findAll();
         ob_start();  //Buffer
         $content = $buffer;
