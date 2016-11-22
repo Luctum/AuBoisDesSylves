@@ -79,8 +79,8 @@
         </div>
     </footer>
 
-    <script type="text/javascript" src="./public/js/vendor/jquery.js"></script>
-    <script type="text/javascript" src="./public/js/vendor/foundation.min.js"></script>
+    <script type="text/javascript" src="./public/js/lib/jquery.js"></script>
+    <script type="text/javascript" src="./public/js/lib/foundation.min.js"></script>
     <script type="text/javascript" src="./public/js/app.js"></script>
 
 </body>

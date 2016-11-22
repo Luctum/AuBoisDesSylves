@@ -7,8 +7,9 @@ ErrorHandler::register();
 ExceptionHandler::register();
 
 $app->register(new Propel\Silex\PropelServiceProvider(), array(
-    'propel.config_file' => 'vendor/bin/generated-conf/config.php'
+    'propel.config_file' => __DIR__ . '/config/generated-conf/config.php'
 ));
+
 /*
 // Register services.
 $app['dao.category'] = function ($app){
