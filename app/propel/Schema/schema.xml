@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" namespace="AuBoisDesSylves\Propel\Models" defaultPhpNamingMethod="underscore">
+  <table name="bs_categories" idMethod="native" phpName="BsCategories" namespace="AuBoisDesSylves\Propel\Models">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="11" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="bs_contents" idMethod="native" phpName="BsContents" namespace="AuBoisDesSylves\Propel\Models">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_product" phpName="IdProduct" type="INTEGER" required="true"/>
+    <column name="id_order" phpName="IdOrder" type="INTEGER" required="true"/>
+    <column name="quantity" phpName="Quantity" type="INTEGER" required="true"/>
+    <foreign-key foreignTable="bs_products" name="bs_contents_ibfk_1">
+      <reference local="id_product" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="bs_orders" name="bs_contents_ibfk_2">
+      <reference local="id_order" foreign="id"/>
+    </foreign-key>
+    <index name="id_product">
+      <index-column name="id_product"/>
+    </index>
+    <index name="id_order">
+      <index-column name="id_order"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="bs_orders" idMethod="native" phpName="BsOrders" namespace="AuBoisDesSylves\Propel\Models">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" required="true"/>
+    <column name="date_created" phpName="DateCreated" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
+    <column name="date_edited" phpName="DateEdited" type="TIMESTAMP"/>
+    <column name="date_cancelled" phpName="DateCancelled" type="TIMESTAMP"/>
+    <column name="id_state" phpName="IdState" type="INTEGER" required="true" defaultValue="1"/>
+    <foreign-key foreignTable="bs_states" name="bs_orders_ibfk_1">
+      <reference local="id_state" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="bs_users" name="bs_orders_ibfk_2">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="id_state">
+      <index-column name="id_state"/>
+    </index>
+    <index name="id_user">
+      <index-column name="id_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="bs_products" idMethod="native" phpName="BsProducts" namespace="AuBoisDesSylves\Propel\Models">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="255" required="true"/>
+    <column name="id_category" phpName="IdCategory" type="INTEGER" required="true"/>
+    <column name="price" phpName="Price" type="INTEGER" required="true"/>
+    <column name="availability" phpName="Availability" type="TINYINT" required="true"/>
+    <column name="icon" phpName="Icon" type="VARCHAR" size="255"/>
+    <foreign-key foreignTable="bs_categories" name="bs_products_ibfk_1">
+      <reference local="id_category" foreign="id"/>
+    </foreign-key>
+    <index name="id_category">
+      <index-column name="id_category"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="bs_states" idMethod="native" phpName="BsStates" namespace="AuBoisDesSylves\Propel\Models">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="bs_users" idMethod="native" phpName="BsUsers" namespace="AuBoisDesSylves\Propel\Models">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
+    <column name="surname" phpName="Surname" type="VARCHAR" size="255" required="true"/>
+    <column name="mail" phpName="Mail" type="VARCHAR" size="255" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
+    <column name="rank" phpName="Rank" type="TINYINT" required="true" defaultValue="1"/>
+    <column name="address" phpName="Address" type="VARCHAR" size="255" required="true"/>
+    <column name="city" phpName="City" type="VARCHAR" size="255" required="true"/>
+    <column name="postal_code" phpName="PostalCode" type="INTEGER" required="true"/>
+    <column name="suspensionDate" phpName="Suspensiondate" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

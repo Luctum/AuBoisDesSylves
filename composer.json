@@ -1,9 +1,10 @@
 {
+    "minimum-stability": "dev",
     "require": {
-        "silex/silex": "~2.0",
-        "doctrine/dbal": "2.5.*"
+        "silex/silex":"^2.0",
+        "propel/propel-service-provider-2": "dev-master"
     },
   "autoload": {
-    "psr-4": {"AuBoisDesSylves\\": "app"}
+    "psr-4": { "AuBoisDesSylves\\": "app/" }
   }
 }

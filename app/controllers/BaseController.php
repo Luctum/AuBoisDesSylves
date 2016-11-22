@@ -1,6 +1,7 @@
 <?php
 namespace AuBoisDesSylves\Controllers;
 
+use AuBoisDesSylves\Propel\Models\BsCategoriesQuery;
 /* Functions used in every controllers */
 class BaseController{
 
@@ -11,7 +12,8 @@ class BaseController{
 
     /* Add the content of "buffer" in the layout */
     protected function injectLayout($buffer){
-        $categories = $this->app['dao.category']->findAll();
+      //Récupère toutes les catégories
+        $categories = BsCategoriesQuery::create()->find();
         ob_start();  //Buffer
         $content = $buffer;
         require 'app/views/layout.php';

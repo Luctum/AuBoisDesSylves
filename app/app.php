@@ -6,9 +6,10 @@ use Symfony\Component\Debug\ExceptionHandler;
 ErrorHandler::register();
 ExceptionHandler::register();
 
-// Register service providers.
-$app->register(new Silex\Provider\DoctrineServiceProvider());
-
+$app->register(new Propel\Silex\PropelServiceProvider(), array(
+    'propel.config_file' => 'vendor/bin/generated-conf/config.php'
+));
+/*
 // Register services.
 $app['dao.category'] = function ($app){
     return new AuBoisDesSylves\Models\DAO\CategoryDAO($app['db']);
@@ -18,3 +19,4 @@ $app['dao.user'] =  function ($app){
     return new AuBoisDesSylves\Models\DAO\UserDAO($app['db']);
 };
 
+*/
