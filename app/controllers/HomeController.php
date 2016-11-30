@@ -9,23 +9,16 @@ use AuBoisDesSylves\Propel\Models\BsCategoriesQuery;
 class HomeController extends BaseController{
 
     public function index(){
-        ob_start();
-        if(Security::isLogged()){
-            require "app/views/home/indexCo.php";
-        }else{
-            require "app/views/home/index.php";
-        }
 
-        $buffer = ob_get_clean();
+      return $this->getApp()['twig']->render('layout.html.twig', array(
+        'categories' => $this->getCategories(),
+      ));
 
-        //Inject the view in the layout.
-        //return $this->injectLayout($buffer);
     }
 
     public function test(){
       return $this->getApp()['twig']->render('test.html.twig', array(
         'categories' => $this->getCategories(),
-        'var' => "yo",
       ));
 
     }
