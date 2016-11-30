@@ -4,6 +4,7 @@ namespace AuBoisDesSylves\Controllers;
 use AuBoisDesSylves\Utils\Security;
 use AuBoisDesSylves\Controllers\BaseController;
 use AuBoisDesSylves\Propel\Models as Models;
+use AuBoisDesSylves\Propel\Models\BsCategoriesQuery;
 
 class HomeController extends BaseController{
 
@@ -18,22 +19,13 @@ class HomeController extends BaseController{
         $buffer = ob_get_clean();
 
         //Inject the view in the layout.
-        return $this->injectLayout($buffer);
+        //return $this->injectLayout($buffer);
     }
 
     public function test(){
+      return $this->getApp()['twig']->render('test.html.twig', array(
+        'categories' => $this->getCategories(),
+      ));
 
-      ob_start();
-
-      $user = Models\BSUsersQuery::create()->findPk(1);
-      echo $user->getSurname();
-
-      foreach($user->getOrderss() as $order){
-        echo $order->getId();
-      }
-
-      $buffer = ob_get_clean();
-
-      return $buffer;
     }
 }

@@ -6,9 +6,10 @@ use AuBoisDesSylves\controllers\HomeController;
 $app->get('/', function () use ($app){
         $home = new HomeController($app);
         return $home->index();
-});
+})->bind('homepage');
 
 $app->get('/test', function () use ($app){
-        $home = new HomeController($app);
-        return $home->test();
+    $home = new HomeController($app);
+    return $home->test();
+
 });

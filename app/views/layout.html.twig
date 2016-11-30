@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Au Bois des Sylves - Boutique d'objets de type bois</title>
-		<link rel="stylesheet" href="./public/css/style.css"/>
-		<link rel="stylesheet" href="./public/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="./public/css/foundation.min.css"/>
+		<title>{% block title %}Au Bois des Sylves{% endblock %}</title>
+		<link rel="stylesheet" href="{{ app.request.basepath }}./public/css/style.css"/>
+		<link rel="stylesheet" href="{{ app.request.basepath }}./public/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="{{ app.request.basepath }}./public/css/foundation.min.css"/>
     </head>
 <body>
 	<div class="top">
@@ -60,17 +60,16 @@
 		<nav>
 			<div class="row">
 				<ul class="vertical medium-horizontal menu">
-                    <li><a href="#">Accueil</a></li>
-                    <?php
-                    foreach($categories as $category){ ?>
-					  					<li><a href="#"><?= $category->getName(); ?></a></li>
-                    <?php } ?>
+        <li><a href="#">Accueil</a></li>
+				{% for category in categories %}
+					<li><a href="#">{{category.name}}</a></li>
+				{% endfor %}
 				</ul>
 			</div>
 		</nav>
 	</div>
 
-    <?= $content ?>
+    {% block content %} {% endblock %}
 
     <footer>
         <hr>
@@ -79,9 +78,9 @@
         </div>
     </footer>
 
-    <script type="text/javascript" src="./public/js/lib/jquery.js"></script>
-    <script type="text/javascript" src="./public/js/lib/foundation.min.js"></script>
-    <script type="text/javascript" src="./public/js/app.js"></script>
+    <script type="text/javascript" src="{{ app.request.basepath }}./public/js/lib/jquery.js"></script>
+    <script type="text/javascript" src="{{ app.request.basepath }}./public/js/lib/foundation.min.js"></script>
+    <script type="text/javascript" src="{{ app.request.basepath }}./public/js/app.js"></script>
 
 </body>
 </html>
