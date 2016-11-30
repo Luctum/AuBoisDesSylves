@@ -25,6 +25,7 @@ class HomeController extends BaseController{
     public function test(){
       return $this->getApp()['twig']->render('test.html.twig', array(
         'categories' => $this->getCategories(),
+        'var' => "yo",
       ));
 
     }
