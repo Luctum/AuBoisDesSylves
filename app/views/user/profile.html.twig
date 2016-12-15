@@ -1,0 +1,3 @@
+{% extends "layout.html.twig" %}
+{% block title %} {{ parent() }} - {{app.session.get('user').name}} {{app.session.get('user').surname}}{% endblock %}
+{% block content %} {{app.session.get('user').name}} {% endblock %}

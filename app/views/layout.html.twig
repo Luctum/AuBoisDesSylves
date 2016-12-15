@@ -2,65 +2,45 @@
 <html>
 	<head>
 		<title>{% block title %}Au Bois des Sylves{% endblock %}</title>
-		<link rel="stylesheet" href="{{ app.request.basepath }}./public/css/style.css"/>
-		<link rel="stylesheet" href="{{ app.request.basepath }}./public/css/font-awesome.min.css"/>
-		<link rel="stylesheet" href="{{ app.request.basepath }}./public/css/foundation.min.css"/>
-    </head>
-<body>
+		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/style.css"/>
+		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/font-awesome.min.css"/>
+		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/foundation.min.css"/>
+	</head>
+<body class="beigeBackground">
 	<div class="top">
 		<header>
 			<div class="row">
-				<div class="small-5 columns"><h4>Au Bois des Sylves</h4></div>
+
+				<div class="small-5 columns"><img id="logoCerf" src="{{ url('homepage') }}/public/img/cerf.svg"><h4 id="headerText" class="displayInlineBlock badScriptFont">Au Bois des Sylves</h4></div>
 		  		<div class="small-5 columns">
 					<ul class="menu">
 				        <li><input type="search" placeholder="Rechercher un article"></li>
-				        <li><button type="button" class="secondary button">Search</button></li>
+				        <li><button type="button" class="darkBrown button">Search</button></li>
 					</ul>
 		  		</div>
-
 		  		<div class="small-2 columns">
-		  			<ul class="menu">
-				        <li><button class="secondary button" data-open="connectModal" data-toggle="user-menu-drop"><i class="fa fa-user"></i></button></li>
-                        <!-- Login Modal -->
-                        <div class="reveal" data-animation-in="fade-in fast" data-animation-out="fade-out fast" id="connectModal" aria-labelledby="exampleModalHeader11" data-reveal>
-                            <h4 id="connexion">Connexion</h4>
-                            <hr/>
-                            <div class="row">
-                                <div class="medium-12 columns">
-                                    <button class="alert button"><i class="fa fa-google"></i> Connexion avec Google</button>
-                                    <button class="button"><i class="fa fa-facebook"></i> Connexion avec Facebook</button>
-                                </div>
-                                <form method="POST" action="#">
-                                <div class="medium-12 columns">
-                                    <label>Login
-                                        <input type="text" name="login" placeholder="votremail@mail.com"/>
-                                    </label>
-                                    <label>Password
-                                        <input type="password" name="password" placeholder="motdepasse"/>
-                                    </label>
-                                    <p><input type="checkbox" name="rememberMe" value="1"/>  <label>Se souvenir de mes identifiants</label></p>
-                                    <p>Vous n'avez pas encore de compte ? <a class="success" href="#">Inscrivez-vous maintenant !</a></p>
-                                </div>
-                                <div class="medium-12 columns">
-                                    <div class="button-group" id="connectButton">
-                                        <input type="submit" class="secondary button" value="Se Connecter">
-                                        <button class="alert button" data-close type="button">Retour</button>
-                                    </div>
-                                </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- LoginModal end-->
-
-					    <li><button class="secondary button"><i class="fa fa-shopping-cart"></i></button></li>
-					</ul>
+							<!-- If the user is connected , change the menu a bit... -->
+					<div class="row medium-collapse">
+							{% if app.session.get('user') is not empty %}
+						<div class="large-6 medium-push-3 medium-2 columns">
+								<a href="{{url('logoutAction')}}"><button class="darkBrown button">Profil</button></a>
+							{% else %}
+						<div class="medium-6  medium-push-4 columns ">
+								<button class="darkBrown button" data-open="connectModal" data-toggle="user-menu-drop"><i class="fa fa-user"></i></button>
+								{% include 'connectModal.html.twig' %}
+							{% endif %}
+						</div>
+						<div class="medium-5 columns">
+					    	<button class="darkBrown button"><i class="fa fa-shopping-cart"></i></button>
+						</div>
 		  		</div>
+				</div>
 			</div>
 		</header>
-		<nav>
+		<nav  class="darkBrown badScriptFont">
 			<div class="row">
 				<ul class="vertical medium-horizontal menu">
-        <li><a href="#">Accueil</a></li>
+        <li><a href="{{url('homepage')}}">Accueil</a></li>
 				{% for category in categories %}
 					<li><a href="#">{{category.name}}</a></li>
 				{% endfor %}
@@ -78,9 +58,10 @@
         </div>
     </footer>
 
-    <script type="text/javascript" src="{{ app.request.basepath }}./public/js/lib/jquery.js"></script>
-    <script type="text/javascript" src="{{ app.request.basepath }}./public/js/lib/foundation.min.js"></script>
-    <script type="text/javascript" src="{{ app.request.basepath }}./public/js/app.js"></script>
+    <script type="text/javascript" src="{{ url('homepage') }}/public/js/lib/jquery.js"></script>
+    <script type="text/javascript" src="{{ url('homepage') }}/public/js/lib/foundation.min.js"></script>
+    <script type="text/javascript" src="{{ url('homepage') }}/public/js/app.js"></script>
+		<script type="text/javascript" src="{{ url('homepage') }}/public/js/checkConnect.js"></script>
 
 </body>
 </html>

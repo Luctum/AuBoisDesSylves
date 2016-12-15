@@ -1,17 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Bad+Script');
+
+
 header{
 	padding-top: 25px;
-	padding-bottom: 25px;
-	background-image: url("../img/bg.png");
+	padding-bottom: 20px;
+	background-image: url("../img/bg3.png");
 	background-repeat: repeat-x repet-y;
+	background-color : #714433;
 }
 nav{
 	margin-bottom: 20px;
 	background-repeat: repeat-x repet-y;
 }
+
+#logoCerf{
+	height:45px;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+.displayInlineBlock{
+	display: inline-block;
+}
+
 .top{
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
-.menu-categories{
-	color: black;
+#headerText{
+	font-size: 1.8rem;
+	vertical-align: bottom;
+	margin: 0;
+	padding: 0;
+	color: white;
+}
+
+.darkBrown{
+	background-color: #412525 !important;
+}
+
+.darkBrown a{
+	color: white;
+	font-size: larger;
+}
+.darkBrown a:hover, .darkBrown a:active{
+	color: #f9ea89;
+}
+
+.darkBrown a:hover{
+	color: yellow;
+}
+
+.badScriptFont{
+	font-family: 'Bad Script', cursive;
+}
+
+.beigeBackground{
+	background-color: #fcfbf4;
+	color: #26251d;
 }

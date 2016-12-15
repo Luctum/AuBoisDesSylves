@@ -28,11 +28,11 @@ use Propel\Runtime\Util\PropelDateTime;
 /**
  * Base class that represents a row from the 'bs_users' table.
  *
- * 
+ *
  *
  * @package    propel.generator.AuBoisDesSylves.Propel.Models.AuBoisDesSylves.Propel.Models.Base
  */
-abstract class BsUsers implements ActiveRecordInterface 
+abstract class BsUsers implements ActiveRecordInterface
 {
     /**
      * TableMap class name
@@ -68,42 +68,42 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * The value for the id field.
-     * 
+     *
      * @var        int
      */
     protected $id;
 
     /**
      * The value for the name field.
-     * 
+     *
      * @var        string
      */
     protected $name;
 
     /**
      * The value for the surname field.
-     * 
+     *
      * @var        string
      */
     protected $surname;
 
     /**
      * The value for the mail field.
-     * 
+     *
      * @var        string
      */
     protected $mail;
 
     /**
      * The value for the password field.
-     * 
+     *
      * @var        string
      */
     protected $password;
 
     /**
      * The value for the rank field.
-     * 
+     *
      * Note: this column has a database default value of: 1
      * @var        int
      */
@@ -111,28 +111,28 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * The value for the address field.
-     * 
+     *
      * @var        string
      */
     protected $address;
 
     /**
      * The value for the city field.
-     * 
+     *
      * @var        string
      */
     protected $city;
 
     /**
      * The value for the postal_code field.
-     * 
+     *
      * @var        int
      */
     protected $postal_code;
 
     /**
      * The value for the suspensiondate field.
-     * 
+     *
      * @var        DateTime
      */
     protected $suspensiondate;
@@ -387,17 +387,17 @@ abstract class BsUsers implements ActiveRecordInterface
         $cls = new \ReflectionClass($this);
         $propertyNames = [];
         $serializableProperties = array_diff($cls->getProperties(), $cls->getProperties(\ReflectionProperty::IS_STATIC));
-        
+
         foreach($serializableProperties as $property) {
             $propertyNames[] = $property->getName();
         }
-        
+
         return $propertyNames;
     }
 
     /**
      * Get the [id] column value.
-     * 
+     *
      * @return int
      */
     public function getId()
@@ -407,7 +407,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [name] column value.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -417,7 +417,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [surname] column value.
-     * 
+     *
      * @return string
      */
     public function getSurname()
@@ -427,7 +427,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [mail] column value.
-     * 
+     *
      * @return string
      */
     public function getMail()
@@ -437,7 +437,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [password] column value.
-     * 
+     *
      * @return string
      */
     public function getPassword()
@@ -447,7 +447,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [rank] column value.
-     * 
+     *
      * @return int
      */
     public function getRank()
@@ -457,7 +457,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [address] column value.
-     * 
+     *
      * @return string
      */
     public function getAddress()
@@ -467,7 +467,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [city] column value.
-     * 
+     *
      * @return string
      */
     public function getCity()
@@ -477,7 +477,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [postal_code] column value.
-     * 
+     *
      * @return int
      */
     public function getPostalCode()
@@ -487,7 +487,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Get the [optionally formatted] temporal [suspensiondate] column value.
-     * 
+     *
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *                            If format is NULL, then the raw DateTime object will be returned.
@@ -507,7 +507,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [id] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -527,7 +527,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [name] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -547,7 +547,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [surname] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -567,7 +567,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [mail] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -587,7 +587,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [password] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -607,7 +607,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [rank] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -627,7 +627,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [address] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -647,7 +647,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [city] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -667,7 +667,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Set the value of [postal_code] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
      */
@@ -687,7 +687,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
     /**
      * Sets the value of [suspensiondate] column to a normalized version of the date/time value specified.
-     * 
+     *
      * @param  mixed $v string, integer (timestamp), or \DateTimeInterface value.
      *               Empty strings are treated as NULL.
      * @return $this|\AuBoisDesSylves\Propel\Models\BsUsers The current object (for fluent API support)
@@ -1042,34 +1042,34 @@ abstract class BsUsers implements ActiveRecordInterface
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case 'id':                        
+                    case 'id':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case 'name':                        
+                    case 'name':
                         $stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case 'surname':                        
+                    case 'surname':
                         $stmt->bindValue($identifier, $this->surname, PDO::PARAM_STR);
                         break;
-                    case 'mail':                        
+                    case 'mail':
                         $stmt->bindValue($identifier, $this->mail, PDO::PARAM_STR);
                         break;
-                    case 'password':                        
+                    case 'password':
                         $stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
                         break;
-                    case 'rank':                        
+                    case 'rank':
                         $stmt->bindValue($identifier, $this->rank, PDO::PARAM_INT);
                         break;
-                    case 'address':                        
+                    case 'address':
                         $stmt->bindValue($identifier, $this->address, PDO::PARAM_STR);
                         break;
-                    case 'city':                        
+                    case 'city':
                         $stmt->bindValue($identifier, $this->city, PDO::PARAM_STR);
                         break;
-                    case 'postal_code':                        
+                    case 'postal_code':
                         $stmt->bindValue($identifier, $this->postal_code, PDO::PARAM_INT);
                         break;
-                    case 'suspensionDate':                        
+                    case 'suspensionDate':
                         $stmt->bindValue($identifier, $this->suspensiondate ? $this->suspensiondate->format("Y-m-d H:i:s.u") : null, PDO::PARAM_STR);
                         break;
                 }
@@ -1208,15 +1208,15 @@ abstract class BsUsers implements ActiveRecordInterface
         if ($result[$keys[9]] instanceof \DateTime) {
             $result[$keys[9]] = $result[$keys[9]]->format('c');
         }
-        
+
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
             $result[$key] = $virtualColumn;
         }
-        
+
         if ($includeForeignObjects) {
             if (null !== $this->collBsOrderss) {
-                
+
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
                         $key = 'bsOrderss';
@@ -1227,7 +1227,7 @@ abstract class BsUsers implements ActiveRecordInterface
                     default:
                         $key = 'BsOrderss';
                 }
-        
+
                 $result[$key] = $this->collBsOrderss->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
@@ -1464,7 +1464,7 @@ abstract class BsUsers implements ActiveRecordInterface
 
         return spl_object_hash($this);
     }
-        
+
     /**
      * Returns the primary key for this object (row).
      * @return int
@@ -1693,7 +1693,7 @@ abstract class BsUsers implements ActiveRecordInterface
         /** @var ChildBsOrders[] $bsOrderssToDelete */
         $bsOrderssToDelete = $this->getBsOrderss(new Criteria(), $con)->diff($bsOrderss);
 
-        
+
         $this->bsOrderssScheduledForDeletion = $bsOrderssToDelete;
 
         foreach ($bsOrderssToDelete as $bsOrdersRemoved) {

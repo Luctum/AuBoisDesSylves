@@ -12,17 +12,7 @@ class BaseController{
         $this->app = $app;
         $this->categories = BsCategoriesQuery::create()->find();
     }
-/*
-    //Add the content of "buffer" in the layout
-    protected function injectLayout($buffer){
-      //Récupère toutes les catégories
-        ob_start();  //Buffer
-        $content = $buffer;
-        require 'app/views/layout.php';
-        $view = ob_get_clean();
-        return $view;
-    }
-*/
+
     protected function getApp() {
         return $this->app;
     }
