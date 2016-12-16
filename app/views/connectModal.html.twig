@@ -3,23 +3,27 @@
     <h4 id="connexion">Connexion</h4>
     <hr/>
     <div class="row">
-        <div class="medium-12 columns">
-            <button class="alert button"><i class="fa fa-google"></i> Connexion avec Google</button>
-            <button class="button"><i class="fa fa-facebook"></i> Connexion avec Facebook</button>
+        <div id="modalHead" class="medium-12 columns">
+            <!--<button class="alert button"><i class="fa fa-google"></i> Connexion avec Google</button>
+            <button class="button"><i class="fa fa-facebook"></i> Connexion avec Facebook</button>-->
         </div>
         <form method="POST" id="formConnect" action="{{path('connectAction')}}">
         <div class="medium-12 columns">
             <label>Mail
                 <input type="text" name="login" id="mailConnect" placeholder="votremail@mail.com"/>
             </label>
+            <p class="help-text" id="mailError"></p>
+
             <label>Mot de passe
                 <input type="password" id="passwordConnect" name="password" placeholder="motdepasse"/>
             </label>
+            <p class="help-text" id="passwordError"></p>
             <p>Vous n'avez pas encore de compte ? <a href="#" class="success" data-open="inscriptionModal">Inscrivez-vous maintenant !</a></p>
         </div>
         <div class="medium-12 columns">
             <div class="button-group" id="connectButton">
-                <input type="submit" class="secondary button" value="Se Connecter">
+
+                <button form="formConnect" type="submit" id="submitButton" class="secondary button">Se Connecter</button>
                 <button class="alert button" data-close type="button">Retour</button>
             </div>
         </div>

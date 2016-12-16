@@ -24,11 +24,24 @@ $app->get('/user/profile', function () use ($app){
 $app->match('/user/connect', function (Request $request) use ($app){
   if($request->isMethod('post')){
     $user = new UserController($app);
+    if($user->connectAction($request)){
+      return $app->redirect($app['url_generator']->generate('profile'));
+    } else{
+      return $app->redirect($app['url_generator']->generate('homepage'));
+    }
+  }
+  //If request is not post, redirect to homepage
+  return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
+})->bind('connectAction');
+
+$app->match('/user/connect/ajax', function (Request $request) use ($app){
+  //Return 1 if user exists and have same logins... else 0.
+  if($request->isMethod('post')){
+    $user = new UserController($app);
     return $user->connectAction($request);
   }
-  //return "non";
-  return "yo";
-})->bind('connectAction');
+
+})->bind('connectAjax');
 
 
 //connectAction, instant redirect to profile

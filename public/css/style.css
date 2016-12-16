@@ -59,3 +59,8 @@ nav{
 	background-color: #fcfbf4;
 	color: #26251d;
 }
+
+#passwordError, #mailError{
+	font-size : smaller;
+	color: red;
+}
