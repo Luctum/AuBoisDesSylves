@@ -20,7 +20,7 @@ $app->get('/user/profile', function () use ($app){
     return $user->profile();
 })->bind('profile');
 
-//connectAction, instant redirect to profile
+//connectAction, instant redirect to profile, if javascript doesn't work... otherwise using connect/ajax below
 $app->match('/user/connect', function (Request $request) use ($app){
   if($request->isMethod('post')){
     $user = new UserController($app);
@@ -34,6 +34,7 @@ $app->match('/user/connect', function (Request $request) use ($app){
   return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
 })->bind('connectAction');
 
+//For ajax request only...
 $app->match('/user/connect/ajax', function (Request $request) use ($app){
   //Return 1 if user exists and have same logins... else 0.
   if($request->isMethod('post')){
@@ -41,10 +42,9 @@ $app->match('/user/connect/ajax', function (Request $request) use ($app){
     return $user->connectAction($request);
   }
 
-})->bind('connectAjax');
+});
 
-
-//connectAction, instant redirect to profile
+//logout
 $app->get('/user/logout', function () use ($app){
     $home = new UserController($app);
     return $home->logoutAction();
