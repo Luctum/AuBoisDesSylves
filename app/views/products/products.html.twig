@@ -1,0 +1,20 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+
+    <div class="row">
+    {% for product in products %}
+
+            <div class="small-4 columns">
+                {{product.name}}
+                <br>{{product.description}}
+                <br>Prix : {{product.price}}
+                <br>Disponible : {{product.availability}}
+                <br><img src="{{product.icon}}">
+                <br>
+            </div>
+
+    {% endfor %}
+    </div>
+{% endblock %}
+
+
