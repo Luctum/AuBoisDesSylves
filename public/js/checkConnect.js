@@ -7,7 +7,7 @@ function checkConnectOnSend(){
     document.querySelector('#passwordError').innerHTML = "";
     document.querySelector('#mailError').innerHTML = "";
 
-
+//If field are empty, then
     if(mail.value == "" || pwd.value == ""){
       if(mail.value == ""){
         document.querySelector('#mailError').innerHTML = "Veuillez entrer votre identifiant";
@@ -33,26 +33,25 @@ function connectAjax($data){
   document.querySelector('#passwordError').innerHTML = "";
   var submitButton =document.querySelector('#submitButton');
 
-  //Loading for low connexion
+  //Loading for low connexion, "Log In" button is disabled.
   submitButton.classList.add('disabled');
   submitButton.disabled = true;
   submitButton.innerHTML = '<i class="fa fa-cog fa-spin" style="font-size:20px"></i>';
 
   var xhr = getHttpRequest();
-  //Récupère les ID, les envoient dans la requete en post.
+  //Takes  Id's and send them in the POST request.
   xhr.open('POST', window.location.origin+''+window.location.pathname+'user/connect/ajax', true);
 
   // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
   xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
-  // On lance la requête
   xhr.send($data);
 
-//Check if request is OK
+  //Check if request is OK
   xhr.onreadystatechange = function () {
 
-    //OK
-    //While waiting for the response field is disabled
+    //Ruest is done sending
     if (xhr.readyState === 4) {
+      //Request is ok
       if (xhr.status === 200) {
         if(xhr.responseText == 1){
           document.querySelector('#passwordError').innerHTML = "Connexion reussie, veuillez patienter";
