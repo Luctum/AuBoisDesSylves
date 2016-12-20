@@ -11,7 +11,6 @@ class HomeController extends BaseController{
   * Index of the website.
   */
     public function index(){
-      $product = Models\BsProductsQuery::create()->find();
       return $this->getApp()['twig']->render('layout.html.twig', array(
         'categories' => $this->getCategories(),
       ));

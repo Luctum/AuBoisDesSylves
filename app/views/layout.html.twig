@@ -6,40 +6,43 @@
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/foundation.min.css"/>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/checkConnect.js"></script>
-
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="Au Bois Des Sylves vous permet d'obtenir des objets et bijous en bois fait main">
-
 	</head>
 <body class="beigeBackground">
 	<div class="top">
 		<header>
 			<div class="row">
-
-				<div class="small-5 columns"><img id="logoCerf" src="{{ url('homepage') }}/public/img/cerf.svg"><h4 id="headerText" class="displayInlineBlock badScriptFont">Au Bois des Sylves</h4></div>
-		  		<div class="small-5 columns">
+				<div class="medium-5 columns"><img id="logoCerf" src="{{ url('homepage') }}/public/img/cerf.svg"><h4 id="headerText" class="displayInlineBlock badScriptFont">Au Bois des Sylves</h4>
+				</div>
+					<div class="medium-5 columns">
 						<ul class="menu">
-					        <li><input type="search" placeholder="Rechercher un article"></li>
-					        <li><button type="button" class="darkBrown button">Recherche</button></li>
+					        <li><input type="search" placeholder="Rechercher un produit ..."></li>
+					        <li><button type="button" class="darkBrown button"><i class="fa fa-search"></i></button></li>
 						</ul>
 		  		</div>
-		  		<div class="small-2 columns">
-							<!-- If the user is connected , change the menu a bit... -->
-					<div class="row medium-collapse">
-							{% if app.session.get('user') is not empty %}
-						<div class="large-6 medium-push-3 medium-2 columns">
-							<a href="{{url('logoutAction')}}"><button class="darkBrown button">Profil</button></a>
-							{% else %}
-						<div class="medium-6  medium-push-4 columns ">
-								<button class="darkBrown button" data-open="connectModal" data-toggle="user-menu-drop"><i class="fa fa-user"></i></button>
-								{% include 'connectModal.html.twig' %}
-							{% endif %}
-						</div>
-						<div class="medium-5 columns">
-					    	<button class="darkBrown button"><i class="fa fa-shopping-cart"></i></button>
-						</div>
+		  		<div class="medium-2 columns">
+						<!-- Dropdown menu if user is connected -->
+						<ul class="dropdown menu userMenu" data-dropdown-menu>
+						{% if app.session.get('user') is not empty %}
+							<li>
+								<button class="darkBrown button">{{app.session.get('user').name}}</button>
+								<ul class="menu">
+									<li><a href="{{url('profile')}}">Mon profil</a></li>
+									<li><a href="#">Paramètres</a></li>
+									<li><a href="{{url('logoutAction')}}">Deconnexion</a></li>
+								</ul>
+							</li>
+						{% else %}
+							<li><button class="darkBrown button" data-open="connectModal" data-toggle="user-menu-drop"><i class="fa fa-user"></i></button>
+							{% include 'connectModal.html.twig' %}
+						{% endif %}
+						<li>
+							<button class="darkBrown button"><i class="fa fa-shopping-cart"></i></button>
+						</li>
+					</ul>
 		  		</div>
-				</div>
+				</div><!-- EndRow -->
 			</div>
 		</header>
 		<nav  class="darkBrown badScriptFont">
@@ -53,7 +56,6 @@
 			</div>
 		</nav>
 	</div>
-
     {% block content %} {% endblock %}
 
     <footer>
