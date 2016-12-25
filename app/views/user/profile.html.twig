@@ -1,3 +1,89 @@
 {% extends "layout.html.twig" %}
-{% block title %} {{ parent() }} - {{app.session.get('user').name}} {{app.session.get('user').surname}}{% endblock %}
-{% block content %} {{app.session.get('user').name}} {% endblock %}
+{% set actualUser = app.session.get('user') %}
+{% set image = "" %}
+{% block title %} {{ parent() }} - {{actualUser.name}} {{actualUser.surname}}{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="medium-4 columns">
+    <h4>{{actualUser.name}} {{actualUser.surname}} <button data-open="editModal" class="darkBrown button tiny map">Edit</button></h4>
+    <ul class="vcard">
+      <a href="#" class="darkBrown button tiny map" data-open="mapModal" title="Afficher sur la carte"><i class="fa fa-map-marker" aria-hidden="true"></i></a>
+      <li class="fn">{{actualUser.surname|upper }} {{actualUser.name}}</li>
+      <li>{{actualUser.address}}</li>
+      <li>{{actualUser.city}}</li>
+      <li>{{actualUser.postalCode}}</li>
+      <li class="email"><a href="mailto:{{actualUser.mail}}">{{actualUser.mail}}</a></li>
+    </ul>
+  </div>
+  <div class="medium-8 columns">
+
+    <h4>Vos Commandes <span class="badge warning">{{orders|length}}</span></h4>
+    <!-- Variable definition -->
+      {% for order in orders %}
+        <div class="orderCard">
+          <div class="orderDetail">
+            <ol>
+              {% set total = 0 %}
+              {% for content in order.BsContentss %}
+                {% set total = total + content.quantity * content.BsProducts.price %}
+                {% set image = content.BsProducts.icon %}
+                <li>
+                  {{content.BsProducts.name}} ({{content.BsProducts.price}}€) x{{content.quantity}}
+                </li>
+              {% endfor %}
+              {% if order.idState == 2 %}
+                {% set state = "ok" %}
+              {% else %}
+                {% set state = "notOk" %}
+              {% endif %}
+            </ol>
+          </div>
+          <div class="orderOverview">
+            <img src="{{image}}">
+              <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; {{order.dateCreated|date("d/m/Y")}} <br/>
+            <small class="totalOrder">{{total}}€</small>
+            <span class="status {{state}}">{{order.BsStates.name}}</span>
+          </div>
+        </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Map Modal -->
+<div class="reveal" data-animation-in="fade-in fast" data-animation-out="fade-out fast" id="mapModal" aria-labelledby="exampleModalHeader11" data-reveal>
+  <h3>Votre adresse sur la carte:</h3>
+  <p><i>Si la carte du monde s'affiche votre adresse est surement erronée ! Veuillez la modifier.</i></p>
+  <iframe frameborder="0" style="border:0" width='100%' height='400px'
+  src="https://www.google.com/maps/embed/v1/search?q={{actualUser.address}}%2C%20{{actualUser.city}}&key=AIzaSyDcrOZstkavRMFRuTgTMo8n0kv0IFPMG1U"></iframe>
+  <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<!-- Edit -->
+<div class="reveal" data-animation-in="fade-in" data-animation-out="fade-out fast" id="editModal" aria-labelledby="exampleModalHeader11" data-reveal>
+  <h3>Modifier vos informations</h3>
+  <hr>
+  <form id="formEdit" action="{{url('editUserAction')}}" method="POST">
+    <label>Nom</label><input type="text" name="surname" value="{{actualUser.surname}}"/>
+    <label>Prenom</label><input type="text" name="name" value="{{actualUser.name}}"/>
+    <label>Mail</label><input type="text" name="mail" value="{{actualUser.mail}}"/>
+    <label>Adresse</label><input type="text" name="address" value="{{actualUser.address}}"/>
+    <label>Ville</label><input type="text" name="city" value="{{actualUser.city}}"/>
+    <label>Code Postal</label><input type="text" name="pc" value="{{actualUser.postalCode}}"/>
+    <input type="checkbox" name="wantToEdit" id="wantToEdit" value="1" /><label>Modifier votre mot de passe ?</label>
+    <label>Ancien mot de passe</label><input id="oldPassword" type="password" name="oldPassword" disabled />
+    <label>Nouveau mot de passe</label><input id="newPassword1" type="password" name="newPassword1" disabled />
+    <label>Réecrire le nouveau mot de passe</label><input id="newPassword2" type="password" name="newPassword2" disabled />
+    <button form="formEdit" type="submit" id="submitButton" class="secondary button">Modifier</button>
+  </form>
+
+  <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+
+{% endblock %}

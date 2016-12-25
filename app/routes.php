@@ -40,11 +40,19 @@ $app->match('/user/connect/ajax', function (Request $request) use ($app){
     $user = new UserController($app);
     return $user->connectAction($request);
   }
-
+  return $app->redirect($app['url_generator']->generate('homepage'));
 });
+
+$app->match('/user/edit', function(Request $request) use ($app){
+  if($request->isMethod('post')){
+    $user = new UserController($app);
+    return $user->editAction($request);
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
+})->bind('editUserAction');
 
 //logout
 $app->get('/user/logout', function () use ($app){
-    $home = new UserController($app);
-    return $home->logoutAction();
+    $user = new UserController($app);
+    return $user->logoutAction();
 })->bind('logoutAction');

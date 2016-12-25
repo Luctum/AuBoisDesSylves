@@ -6,10 +6,12 @@
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/foundation.min.css"/>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/checkConnect.js"></script>
+		<script type="text/javascript" src="{{ url('homepage') }}/public/js/userEdit.js"></script>
+
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="Au Bois Des Sylves vous permet d'obtenir des objets et bijous en bois fait main">
 	</head>
-<body class="beigeBackground">
+<body>
 	<div class="top">
 		<header>
 			<div class="row">
@@ -28,7 +30,7 @@
 							<li>
 								<button class="darkBrown button">{{app.session.get('user').name}}</button>
 								<ul class="menu">
-									<li><a href="{{url('profile')}}">Mon profil</a></li>
+									<li><a href="{{url('profile')}}">Mon profil / Mes commandes</a></li>
 									<li><a href="#">Paramètres</a></li>
 									<li><a href="{{url('logoutAction')}}">Deconnexion</a></li>
 								</ul>
@@ -45,7 +47,7 @@
 				</div><!-- EndRow -->
 			</div>
 		</header>
-		<nav  class="darkBrown badScriptFont">
+		<nav class="darkBrown badScriptFont wood">
 			<div class="row">
 				<ul class="vertical medium-horizontal menu">
         <li><a href="{{url('homepage')}}">Accueil</a></li>
@@ -56,19 +58,19 @@
 			</div>
 		</nav>
 	</div>
+	<div class="woodBackground">
     {% block content %} {% endblock %}
-
+	</div>
     <footer>
         <hr>
         <div class="row">
             Tous droits réservés, Au Bois Des Sylves, 2016
         </div>
     </footer>
-
     <script type="text/javascript" src="{{ url('homepage') }}/public/js/lib/jquery.js"></script>
     <script type="text/javascript" src="{{ url('homepage') }}/public/js/lib/foundation.min.js"></script>
     <script type="text/javascript" src="{{ url('homepage') }}/public/js/app.js"></script>
 		<script> checkConnectOnSend(); </script>
-
+		<script> checkPasswordModify(); </script>
 </body>
 </html>

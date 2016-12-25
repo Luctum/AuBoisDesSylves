@@ -28,11 +28,11 @@ use Propel\Runtime\Parser\AbstractParser;
 /**
  * Base class that represents a row from the 'bs_products' table.
  *
- * 
+ *
  *
  * @package    propel.generator.AuBoisDesSylves.Propel.Models.AuBoisDesSylves.Propel.Models.Base
  */
-abstract class BsProducts implements ActiveRecordInterface 
+abstract class BsProducts implements ActiveRecordInterface
 {
     /**
      * TableMap class name
@@ -68,49 +68,49 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * The value for the id field.
-     * 
+     *
      * @var        int
      */
     protected $id;
 
     /**
      * The value for the name field.
-     * 
+     *
      * @var        string
      */
     protected $name;
 
     /**
      * The value for the description field.
-     * 
+     *
      * @var        string
      */
     protected $description;
 
     /**
      * The value for the id_category field.
-     * 
+     *
      * @var        int
      */
     protected $id_category;
 
     /**
      * The value for the price field.
-     * 
-     * @var        int
+     *
+     * @var        double
      */
     protected $price;
 
     /**
      * The value for the availability field.
-     * 
+     *
      * @var        int
      */
     protected $availability;
 
     /**
      * The value for the icon field.
-     * 
+     *
      * @var        string
      */
     protected $icon;
@@ -357,17 +357,17 @@ abstract class BsProducts implements ActiveRecordInterface
         $cls = new \ReflectionClass($this);
         $propertyNames = [];
         $serializableProperties = array_diff($cls->getProperties(), $cls->getProperties(\ReflectionProperty::IS_STATIC));
-        
+
         foreach($serializableProperties as $property) {
             $propertyNames[] = $property->getName();
         }
-        
+
         return $propertyNames;
     }
 
     /**
      * Get the [id] column value.
-     * 
+     *
      * @return int
      */
     public function getId()
@@ -377,7 +377,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Get the [name] column value.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -387,7 +387,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Get the [description] column value.
-     * 
+     *
      * @return string
      */
     public function getDescription()
@@ -397,7 +397,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Get the [id_category] column value.
-     * 
+     *
      * @return int
      */
     public function getIdCategory()
@@ -407,7 +407,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Get the [price] column value.
-     * 
+     *
      * @return int
      */
     public function getPrice()
@@ -417,7 +417,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Get the [availability] column value.
-     * 
+     *
      * @return int
      */
     public function getAvailability()
@@ -427,7 +427,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Get the [icon] column value.
-     * 
+     *
      * @return string
      */
     public function getIcon()
@@ -437,7 +437,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [id] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -457,7 +457,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [name] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -477,7 +477,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [description] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -497,7 +497,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [id_category] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -521,7 +521,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [price] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -541,7 +541,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [availability] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -561,7 +561,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
     /**
      * Set the value of [icon] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
@@ -907,25 +907,25 @@ abstract class BsProducts implements ActiveRecordInterface
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case 'id':                        
+                    case 'id':
                         $stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case 'name':                        
+                    case 'name':
                         $stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case 'description':                        
+                    case 'description':
                         $stmt->bindValue($identifier, $this->description, PDO::PARAM_STR);
                         break;
-                    case 'id_category':                        
+                    case 'id_category':
                         $stmt->bindValue($identifier, $this->id_category, PDO::PARAM_INT);
                         break;
-                    case 'price':                        
+                    case 'price':
                         $stmt->bindValue($identifier, $this->price, PDO::PARAM_INT);
                         break;
-                    case 'availability':                        
+                    case 'availability':
                         $stmt->bindValue($identifier, $this->availability, PDO::PARAM_INT);
                         break;
-                    case 'icon':                        
+                    case 'icon':
                         $stmt->bindValue($identifier, $this->icon, PDO::PARAM_STR);
                         break;
                 }
@@ -1053,10 +1053,10 @@ abstract class BsProducts implements ActiveRecordInterface
         foreach ($virtualColumns as $key => $virtualColumn) {
             $result[$key] = $virtualColumn;
         }
-        
+
         if ($includeForeignObjects) {
             if (null !== $this->aBsCategories) {
-                
+
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
                         $key = 'bsCategories';
@@ -1067,11 +1067,11 @@ abstract class BsProducts implements ActiveRecordInterface
                     default:
                         $key = 'BsCategories';
                 }
-        
+
                 $result[$key] = $this->aBsCategories->toArray($keyType, $includeLazyLoadColumns,  $alreadyDumpedObjects, true);
             }
             if (null !== $this->collBsContentss) {
-                
+
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
                         $key = 'bsContentss';
@@ -1082,7 +1082,7 @@ abstract class BsProducts implements ActiveRecordInterface
                     default:
                         $key = 'BsContentss';
                 }
-        
+
                 $result[$key] = $this->collBsContentss->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
@@ -1292,7 +1292,7 @@ abstract class BsProducts implements ActiveRecordInterface
 
         return spl_object_hash($this);
     }
-        
+
     /**
      * Returns the primary key for this object (row).
      * @return int
@@ -1569,7 +1569,7 @@ abstract class BsProducts implements ActiveRecordInterface
         /** @var ChildBsContents[] $bsContentssToDelete */
         $bsContentssToDelete = $this->getBsContentss(new Criteria(), $con)->diff($bsContentss);
 
-        
+
         $this->bsContentssScheduledForDeletion = $bsContentssToDelete;
 
         foreach ($bsContentssToDelete as $bsContentsRemoved) {

@@ -7,7 +7,7 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
-  <table name="bs_contents" idMethod="native" phpName="BsContents" namespace="AuBoisDesSylves\Propel\Models">
+  <table name="bs_contents" idMethod="native" phpName="BsContents" namespace="AuBoisDesSylves\Propel\Models" isCrossRef="true">
     <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="id_product" phpName="IdProduct" type="INTEGER" required="true"/>
     <column name="id_order" phpName="IdOrder" type="INTEGER" required="true"/>
@@ -28,7 +28,7 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
-  <table name="bs_orders" idMethod="native" phpName="BsOrders" namespace="AuBoisDesSylves\Propel\Models">
+  <table name="bs_orders" idMethod="native" phpName="BsOrders" namespace="AuBoisDesSylves\Propel\Models" >
     <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="id_user" phpName="IdUser" type="INTEGER" required="true"/>
     <column name="date_created" phpName="DateCreated" type="TIMESTAMP" required="true" defaultExpr="CURRENT_TIMESTAMP"/>
@@ -40,6 +40,10 @@
     </foreign-key>
     <foreign-key foreignTable="bs_users" name="bs_orders_ibfk_2">
       <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <!-- Many to many reference -->
+    <foreign-key foreignTable="bs_contents" name="bs_contents_ibfk_2">
+      <reference local="id" foreign="id_orders"/>
     </foreign-key>
     <index name="id_state">
       <index-column name="id_state"/>
@@ -56,11 +60,14 @@
     <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
     <column name="description" phpName="Description" type="VARCHAR" size="255" required="true"/>
     <column name="id_category" phpName="IdCategory" type="INTEGER" required="true"/>
-    <column name="price" phpName="Price" type="INTEGER" required="true"/>
+    <column name="price" phpName="Price" type="DOUBLE" required="true"/>
     <column name="availability" phpName="Availability" type="TINYINT" required="true"/>
     <column name="icon" phpName="Icon" type="VARCHAR" size="255"/>
     <foreign-key foreignTable="bs_categories" name="bs_products_ibfk_1">
       <reference local="id_category" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="bs_contents" name="bs_contents_ibfk_1">
+      <reference local="id" foreign="id_products"/>
     </foreign-key>
     <index name="id_category">
       <index-column name="id_category"/>
