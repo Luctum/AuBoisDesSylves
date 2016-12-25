@@ -35,31 +35,32 @@
     <h4 id="connexion">Inscription</h4>
     <hr/>
     <div class="row">
-        <form method="POST" action="#">
+        <form id="signup" method="POST" action="{{url('signupAction')}}">
         <div class="medium-12 columns">
           <label>Nom
-              <input type="text" name="prenom" placeholder="votremail@mail.com"/>
+              <input type="text" name="name" placeholder="ex : Durand" required/>
           </label>
           <label>Prenom
-              <input type="text" name="nom" placeholder="votremail@mail.com"/>
+              <input type="text" name="surname" placeholder="ex : Hubert" required/>
           </label>
             <label>Mail
-                <input type="text" name="email" placeholder="votremail@mail.com"/>
+                <input type="text" name="email" placeholder="ex : votremail@mail.com" required/>
             </label>
             <label>Mot de passe
-                <input type="password" name="mdp" placeholder="motdepasse"/>
+                <input type="password" id="pwd" name="pwd" placeholder="Mot de passe" required/>
             </label>
             <label>Resaisir le Password
-                <input type="password" name="remdp" placeholder="motdepasse"/>
+                <input type="password" name="repwd" id="repwd" placeholder="Retapez le mot de passe" required/>
+                <p class="form-error" id="pwdError">Veuillez saisir le même mot de passe dans les deux champs</p>
             </label>
             <label>Adresse
-                <input type="text" name="adresse" placeholder="ex : 3 rue de la fleur"/>
+                <input type="text" name="address" placeholder="ex : 3 rue de la fleur" required/>
             </label>
             <label>Code Postal
-                <input type="text" name="cp" placeholder="ex : 75000"/>
+                <input type="text" name="pc" placeholder="ex : 75000" required/>
             </label>
             <label>Ville
-                <input type="text" name="adresse" placeholder="ex : Paris"/>
+                <input type="text" name="city" placeholder="ex : Paris" required/>
             </label>
         </div>
         <div class="medium-12 columns">

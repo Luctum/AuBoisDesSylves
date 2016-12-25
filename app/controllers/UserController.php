@@ -85,4 +85,69 @@ class UserController extends BaseController{
       return $this->getApp()->redirect($this->getApp()['url_generator']->generate('profile'));
     }
 
+/*
+* Signup an user
+* return -1 if mail alrady exists, 1 if this is ok, 0 otherwise.
+*/
+    public function signupAction($post){
+
+      if($post !== null){
+        $surname = $post->get('surname');
+        $name = $post->get('name');
+        $mail = $post->get('email');
+        $password = $post->get('pwd');
+        $password2 = $post->get('repwd');
+        $address = $post->get('address');
+        $pc = $post->get('pc');
+        $city = $post->get('city');
+        $allFields = array(
+          'surname'=> $surname,
+          'name'=> $name,
+          'mail'=> $mail,
+          'password'=> $password,
+          'password2'=> $password2,
+          'address'=> $address,
+          'pc'=> $pc,
+          'city'=> $city
+        );
+
+        //Check if all fields are not empty
+        foreach($allFields as $field){
+          if($field == "" || $field == NULL){
+            return 0;
+          }
+        }
+
+        $userCheck = Models\BsUsersQuery::create()->filterByMail($mail)->findOne();
+        //Check if mail already exists
+        if($userCheck != null){
+          return -1;
+        }
+
+        if($password != $password2){
+          return 0;
+        }
+
+        //If Everything is fine, create the new user.
+        $user = new Models\BsUsers();
+        $user->setName($name);
+        $user->setSurname($surname);
+        $user->setMail($mail);
+        $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+        $user->setAddress($address);
+        $user->setPostalCode($pc);
+        $user->setCity($city);
+        $user->save();
+
+        //If the user is created in the database return 1.
+        $userCheck = Models\BsUsersQuery::create()->filterByMail($mail)->findOne();
+        if($userCheck != null){
+          return 1;
+        }
+
+      }
+
+      return 0;
+    }
+
 }

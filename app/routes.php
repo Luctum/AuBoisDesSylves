@@ -43,6 +43,14 @@ $app->match('/user/connect/ajax', function (Request $request) use ($app){
   return $app->redirect($app['url_generator']->generate('homepage'));
 });
 
+$app->match('/user/signup', function (Request $request) use ($app){
+  if($request->isMethod('post')){
+    $user = new UserController($app);
+    return $user->signupAction($request);
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
+})->bind('signupAction');
+
 $app->match('/user/edit', function(Request $request) use ($app){
   if($request->isMethod('post')){
     $user = new UserController($app);

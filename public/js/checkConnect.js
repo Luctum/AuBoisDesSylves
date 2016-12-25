@@ -72,12 +72,15 @@ function connectAjax($data){
   }
 }
 
-/*
-function checkMailOnKeyPressed(idChamp){
-  var champ = document.querySelector(idChamp);
-  champ.addEventListener("keypress", function(event, champ){
-    var mailCheck = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    mailCheck.test(champ);
+function checkSignupOnSend(){
+  repwd.addEventListener("keyup", function(event){
+    var pwd = document.querySelector('#pwd');
+    var repwd = document.querySelector('#repwd');
+    //If passwords don't match
+    if(pwd.value != repwd.value){
+        document.querySelector('#pwdError').style.display="initial";
+    }else{
+        document.querySelector('#pwdError').style.display="none";
+    }
   });
 }
-*/
