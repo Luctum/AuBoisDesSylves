@@ -160,7 +160,7 @@ class BsProductsTableMap extends TableMap
         $this->addColumn('name', 'Name', 'VARCHAR', true, 255, null);
         $this->addColumn('description', 'Description', 'VARCHAR', true, 255, null);
         $this->addForeignKey('id_category', 'IdCategory', 'INTEGER', 'bs_categories', 'id', true, null, null);
-        $this->addColumn('price', 'Price', 'INTEGER', true, null, null);
+        $this->addColumn('price', 'Price', 'DOUBLE', true, null, null);
         $this->addColumn('availability', 'Availability', 'TINYINT', true, null, null);
         $this->addColumn('icon', 'Icon', 'VARCHAR', false, 255, null);
     } // initialize()
@@ -229,7 +229,7 @@ class BsProductsTableMap extends TableMap
                 : self::translateFieldName('Id', TableMap::TYPE_PHPNAME, $indexType)
         ];
     }
-    
+
     /**
      * The class that the tableMap will make instances of.
      *
@@ -290,7 +290,7 @@ class BsProductsTableMap extends TableMap
     public static function populateObjects(DataFetcherInterface $dataFetcher)
     {
         $results = array();
-    
+
         // set the class once to avoid overhead in the loop
         $cls = static::getOMClass(false);
         // populate the object(s)

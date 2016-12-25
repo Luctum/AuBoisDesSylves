@@ -408,7 +408,7 @@ abstract class BsProducts implements ActiveRecordInterface
     /**
      * Get the [price] column value.
      *
-     * @return int
+     * @return double
      */
     public function getPrice()
     {
@@ -522,7 +522,7 @@ abstract class BsProducts implements ActiveRecordInterface
     /**
      * Set the value of [price] column.
      *
-     * @param int $v new value
+     * @param double $v new value
      * @return $this|\AuBoisDesSylves\Propel\Models\BsProducts The current object (for fluent API support)
      */
     public function setPrice($v)
@@ -628,7 +628,7 @@ abstract class BsProducts implements ActiveRecordInterface
             $this->id_category = (null !== $col) ? (int) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : BsProductsTableMap::translateFieldName('Price', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->price = (null !== $col) ? (int) $col : null;
+            $this->price = (null !== $col) ? (double) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : BsProductsTableMap::translateFieldName('Availability', TableMap::TYPE_PHPNAME, $indexType)];
             $this->availability = (null !== $col) ? (int) $col : null;
