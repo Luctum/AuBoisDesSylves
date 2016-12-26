@@ -7,11 +7,18 @@
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/foundation.min.css"/>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/checkConnect.js"></script>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/userEdit.js"></script>
-
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="Au Bois Des Sylves vous permet d'obtenir des objets et bijous en bois fait main">
 	</head>
 <body>
+	{% if message is not null %}
+	<div class="warning callout large" data-closable>
+	  <p>{{message}}</p>
+	  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+	    <span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	{% endif %}
 	<div class="top">
 		<header>
 			<div class="row">

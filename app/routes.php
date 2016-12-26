@@ -5,28 +5,37 @@ use AuBoisDesSylves\controllers\UserController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-/* HOME ROUTE*/
+/* HOME ROUTE*************************************************************************************/
 //homepage
 $app->get('/', function () use ($app){
         $home = new HomeController($app);
         return $home->index();
 })->bind('homepage');
 
-/* USER ROUTE*/
+//homepage with error
+$app->get('/error/{message}', function ($message) use ($app){
+        $home = new HomeController($app);
+        return $home->index($message);
+})->bind('homepageError');
+
+/* USER ROUTE*************************************************************************************/
 //profile of one user
 $app->get('/user/profile', function () use ($app){
     $user = new UserController($app);
     return $user->profile();
 })->bind('profile');
 
+/**
+* Connecting a user
+**/
 //connectAction, instant redirect to profile, if javascript doesn't work... otherwise using connect/ajax below
 $app->match('/user/connect', function (Request $request) use ($app){
   if($request->isMethod('post')){
     $user = new UserController($app);
     if($user->connectAction($request)){
       return $app->redirect($app['url_generator']->generate('profile'));
-    } else{
-      return $app->redirect($app['url_generator']->generate('homepage'));
+    }else{
+      return $app->redirect($app['url_generator']->generate('homepage', array('message' => 'Erreur : Identifiants incorrects')));
     }
   }
   //If request is not post, redirect to homepage
@@ -43,13 +52,32 @@ $app->match('/user/connect/ajax', function (Request $request) use ($app){
   return $app->redirect($app['url_generator']->generate('homepage'));
 });
 
+
+/**
+* Creating a user
+**/
 $app->match('/user/signup', function (Request $request) use ($app){
   if($request->isMethod('post')){
     $user = new UserController($app);
-    return $user->signupAction($request);
+    $response = $user->signupAction($request);
+
+    switch($response){
+      case 0:
+        $error = "Erreur : Une erreur est survenue lors de votre inscription";
+        break;
+      case 1:
+        $error = "Vous êtres inscrits, veuillez vous connecter !";
+        break;
+      case -1:
+        $error = "Erreur : Cette adresse mail est déjà utilisée, veuillez en utiliser une autre...";
+        break;
+    }
+    return $app->redirect($app['url_generator']->generate('homepageError', array('message'=>$error)));
   }
   return $app->redirect($app['url_generator']->generate('homepage'));
+
 })->bind('signupAction');
+
 
 $app->match('/user/edit', function(Request $request) use ($app){
   if($request->isMethod('post')){
@@ -58,6 +86,7 @@ $app->match('/user/edit', function(Request $request) use ($app){
   }
   return $app->redirect($app['url_generator']->generate('homepage'));
 })->bind('editUserAction');
+
 
 //logout
 $app->get('/user/logout', function () use ($app){

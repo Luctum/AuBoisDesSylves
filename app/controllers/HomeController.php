@@ -10,9 +10,10 @@ class HomeController extends BaseController{
   /*
   * Index of the website.
   */
-    public function index(){
+    public function index($message = null){
       return $this->getApp()['twig']->render('layout.html.twig', array(
         'categories' => $this->getCategories(),
+        'message' => $message
       ));
 
     }
