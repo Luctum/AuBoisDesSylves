@@ -1,5 +1,8 @@
 $(document).foundation()
 
+var path = window.location.origin+'/AuBoisDesSylves';
+
+
 function getHttpRequest() {
   var httpRequest = false;
 

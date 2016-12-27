@@ -2,8 +2,16 @@
 use AuBoisDesSylves\Models;
 use AuBoisDesSylves\controllers\HomeController;
 use AuBoisDesSylves\controllers\UserController;
+use AuBoisDesSylves\controllers\AdminController;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+
+/*
+$app->error(function (\Exception $e) use ($app){
+        $home = new HomeController($app);
+        return $home->error();
+});*/
 
 /* HOME ROUTE*************************************************************************************/
 //homepage
@@ -93,3 +101,21 @@ $app->get('/user/logout', function () use ($app){
     $user = new UserController($app);
     return $user->logoutAction();
 })->bind('logoutAction');
+
+
+
+/* ADMIN ROUTE **************************************/
+$app->get('/admin/users', function () use ($app){
+    $admin = new AdminController($app);
+    return $admin->users();
+})->bind('adminUsers');
+
+$app->get('/admin/products', function () use ($app){
+    $admin = new AdminController($app);
+    return $admin->products();
+})->bind('adminProducts');
+
+$app->get('/admin/orders', function () use ($app){
+    $admin = new AdminController($app);
+    return $admin->orders();
+})->bind('adminOrders');

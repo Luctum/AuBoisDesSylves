@@ -40,7 +40,7 @@ function connectAjax($data){
 
   var xhr = getHttpRequest();
   //Takes  Id's and send them in the POST request.
-  xhr.open('POST', window.location.origin+''+window.location.pathname+'user/connect/ajax', true);
+  xhr.open('POST', path+'/user/connect/ajax', true);
 
   // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
   xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');

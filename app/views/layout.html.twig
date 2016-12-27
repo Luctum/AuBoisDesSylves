@@ -2,16 +2,16 @@
 <html>
 	<head>
 		<title>{% block title %}Au Bois des Sylves{% endblock %}</title>
-		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/style.css"/>
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/font-awesome.min.css"/>
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/foundation.min.css"/>
+		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/style.css"/>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/checkConnect.js"></script>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/userEdit.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="Au Bois Des Sylves vous permet d'obtenir des objets et bijous en bois fait main">
 	</head>
 <body>
-	{% if message is not null %}
+	{% if message is defined and message is not null %}
 	<div class="warning callout large" data-closable>
 	  <p>{{message}}</p>
 	  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
@@ -30,18 +30,27 @@
 					        <li><button type="button" class="darkBrown button"><i class="fa fa-search"></i></button></li>
 						</ul>
 		  		</div>
-		  		<div class="medium-2 columns">
+		  		<div class="large-2 columns">
 						<!-- Dropdown menu if user is connected -->
-						<ul class="dropdown menu userMenu" data-dropdown-menu>
+						<ul class="dropdown menu userMenu " data-dropdown-menu>
 						{% if app.session.get('user') is not empty %}
 							<li>
 								<button class="darkBrown button">{{app.session.get('user').name}}</button>
 								<ul class="menu">
 									<li><a href="{{url('profile')}}">Mon profil / Mes commandes</a></li>
-									<li><a href="#">Paramètres</a></li>
 									<li><a href="{{url('logoutAction')}}">Deconnexion</a></li>
 								</ul>
 							</li>
+								{% if app.session.get('user').rank == 0 %}
+									<li>
+										<button class="darkBrown button">Admin</button>
+										<ul class="menu">
+											<li><a href="{{url('adminUsers')}}">Utilisateurs</a></li>
+											<li><a href="{{url('adminProducts')}}">Produits</a></li>
+											<li><a href="{{url('adminOrders')}}">Commandes</a></li>
+										</ul>
+									</li>
+								{% endif %}
 						{% else %}
 							<li><button class="darkBrown button" data-open="connectModal" data-toggle="user-menu-drop"><i class="fa fa-user"></i></button>
 							{% include 'connectModal.html.twig' %}
@@ -74,6 +83,7 @@
             Tous droits réservés, Au Bois Des Sylves, 2016
         </div>
     </footer>
+		{% block JS %} {% endblock %}
     <script type="text/javascript" src="{{ url('homepage') }}/public/js/lib/jquery.js"></script>
     <script type="text/javascript" src="{{ url('homepage') }}/public/js/lib/foundation.min.js"></script>
     <script type="text/javascript" src="{{ url('homepage') }}/public/js/app.js"></script>

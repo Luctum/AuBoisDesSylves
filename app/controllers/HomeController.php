@@ -1,7 +1,6 @@
 <?php
 namespace AuBoisDesSylves\Controllers;
 
-use AuBoisDesSylves\Utils\Security;
 use AuBoisDesSylves\Controllers\BaseController;
 use AuBoisDesSylves\Propel\Models as Models;
 
@@ -16,6 +15,12 @@ class HomeController extends BaseController{
         'message' => $message
       ));
 
+    }
+
+    public function error(){
+      return $this->getApp()['twig']->render('error.html.twig', array(
+        'categories' => $this->getCategories(),
+      ));
     }
 
 }

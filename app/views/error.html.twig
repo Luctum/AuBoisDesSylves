@@ -1,0 +1,12 @@
+{% extends "layout.html.twig" %}
+{% set actualUser = app.session.get('user') %}
+{% set image = "" %}
+
+{% block content %}
+
+<div class="row text-center">
+  <h1><i class="fa fa-frown-o fa-6" aria-hidden="true"></i> </h1>
+  <h2>Une erreur est survenue...</h2><p>La page demandée n'est pas accessible ou n'existe pas !</p>
+</div>
+
+{% endblock %}

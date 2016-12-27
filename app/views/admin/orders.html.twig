@@ -1,0 +1,55 @@
+{% extends "layout.html.twig" %}
+{% set actualUser = app.session.get('user') %}
+{% block title %} {{ parent() }} - Administration des produits{% endblock %}
+
+{% block content %}
+<div class="row">
+  <h3>Administration des commandes :</h3>
+  <div id="products">
+    <input class="search" type="search" placeholder="Chercher une commande">
+    <p>Cliquer sur le nom de la colonne pour trier</p>
+    <table width="100%">
+      <thead>
+        <tr>
+          <th class="sort" data-sort="id">Id</th>
+          <th class="sort" data-sort="date">Date de création</th>
+          <th class="sort" data-sort="name">Utilisateur</th>
+          <th class="sort" data-sort="state">Etat</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+        <tbody class="list">
+          {% for order in orders  %}
+          <tr>
+            <td class="id">{{order.id}}</td>
+            <td class="date">{{order.dateCreated|date("d/m/Y")}}</td>
+            <td class="name">{{order.BsUsers.name}} {{order.BsUsers.surname}}</td>
+            <td class="state">{{order.BsStates.name}}</td>
+            <td>
+              <button class="secondary button small"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+              <button class="alert button small"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    Pages : <ul class="pagination" style="display: inline-block;"></ul>
+  </div>
+</div>
+{% endblock %}
+
+{% block JS %}
+<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.3.0/list.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
+<script>
+/* Allows the user to order the table as it please and to search in it */
+   var options = {
+    valueNames: [ 'id', 'name', 'category' ,'description', 'availability', 'price' ],
+    page: 5,
+    plugins: [ ListPagination({}) ]
+  };
+  var userList = new List('products', options);
+</script>
+<script src="{{url('homepage')}}/public/js/paginationAutoStyle.js"></script>
+<script>paginationStyle()</script>
+{% endblock %}
