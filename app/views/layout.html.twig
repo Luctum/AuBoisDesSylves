@@ -11,7 +11,7 @@
 		<meta name="Description" content="Au Bois Des Sylves vous permet d'obtenir des objets et bijous en bois fait main">
 	</head>
 <body>
-	{% if message is defined and message is not null %}
+	{% if globalError is defined and globalError is not null and globalError != "" %}
 	<div class="warning callout large" data-closable>
 	  <p>{{message}}</p>
 	  <button class="close-button" aria-label="Dismiss alert" type="button" data-close>

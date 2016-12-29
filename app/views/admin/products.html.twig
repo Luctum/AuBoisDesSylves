@@ -4,10 +4,11 @@
 
 {% block content %}
 <div class="row">
-  <h3>Administration des produits :</h3> <button class="darkBrown button">Ajouter un produit</button>
+  <h3>Administration des produits :</h3> <button class="darkBrown button" id="createButton" data-open="editModal" >Ajouter un produit</button>
   <div id="products">
     <input class="search" type="search" placeholder="Chercher un produit">
-    <p>Cliquer sur le nom de la colonne pour trier</p>
+    <p>Cliquer sur le nom de la colonne pour trier.</p>
+    <p>Pour ne plus afficher un produit, le mettre en "indisponible"</p>
     <table width="100%">
       <thead>
         <tr>
@@ -27,13 +28,18 @@
             <td><img src="{{product.icon}}" width="50px" ></img></td>
             <td class="id">{{product.id}}</td>
             <td class="name">{{product.name}}</td>
-            <td class="description" title="{{product.description}}" ><small>{{product.description|slice(0, 50)}}...</small></td>
+            <td class="description" title="{{product.description}}"><small>{{product.description|slice(0, 50)}}...</small></td>
             <td class="category">{{product.BsCategories.name}}</td>
-            <td class="availability">{{product.availability}}</td>
+            <td class="availability">
+            {% if product.availability == 1 %}
+            <span class="success label">Disponible</span>
+            {% else %}
+            <span class="alert label">Indisponible</span>
+            {% endif %}
+            </td>
             <td class="price">{{product.price}}</td>
             <td>
-              <button class="secondary button small"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-              <button class="alert button small"><i class="fa fa-times" aria-hidden="true"></i></button>
+              <button class="secondary button small" data-open="editModal" data-id-product="{{product.id}}"><span class="fa fa-pencil" style="pointer-events: none;" aria-hidden="true"></span></button>
             </td>
           </tr>
           {% endfor %}
@@ -42,9 +48,45 @@
     Pages : <ul class="pagination" style="display: inline-block;"></ul>
   </div>
 </div>
+
+<!-- Edit/ Create Modal -->
+<div class="reveal" data-animation-in="fade-in" data-animation-out="fade-out fast" id="editModal" aria-labelledby="Créer/Editer un produit" data-reveal>
+  <h3>Créer/Editer un produit</h3>
+  <hr/>
+  <form id="formEdit" action="{{url('editProductAction')}}" method="POST">
+    <label>Produit N°</label><input name="id" type="text" id="idForm" readonly/>
+    <label>Nom</label><input type="text" placeholder="Le nom du produit" id="nameForm" name="name" />
+    <label>Description</label><textarea type="text" id="descriptionForm" placeholder="La description du produit en quelques mots... (Bois utilisé, forme etc)" name="description"></textarea>
+    <label>Image</label><input id="iconForm" type="text" name="icon" />
+    <label>Catégorie</label>
+    <select name="category" id="categoryForm"/>
+      <option id="catNull">Choisissez une catégorie</option>
+      {% for category in categories %}
+        <option id="cat{{category.id}}" value="{{category.id}}">{{category.name}}</option>
+      {% endfor %}
+    </select>
+    <label>Disponibilité</label>
+    <select name="availability" id="availabilityForm"/>
+      <option id="avail0" value="0">Indisponible</option>
+      <option id="avail1" value="1">Disponible</option>
+    </select>
+    <label>Prix</label>
+    <div class="input-group">
+      <span class="input-group-label">€</span>
+      <input type="text" class="input-group-field" name="price" id="priceForm" placeholder="ex : 100" value=""/>
+    </div>
+      <button form="formEdit" type="submit" id="submitButton" class="secondary button">Valider</button>
+  </form>
+  <button class="close-button" data-close aria-label="Close reveal" type="button">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 {% endblock %}
 
 {% block JS %}
+<!-- AutoFill for Edit needs to be before "List", otherwise it only affect products on the first page... -->
+<script src="{{url('homepage')}}/public/js/adminFormAutoFill.js"></script>
+<script>getIdProductOnClick(); productCleanFields();</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.3.0/list.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
 <script>

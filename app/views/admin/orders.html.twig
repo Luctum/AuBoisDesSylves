@@ -5,9 +5,15 @@
 {% block content %}
 <div class="row">
   <h3>Administration des commandes :</h3>
-  <div id="products">
+  <div id="orders">
     <input class="search" type="search" placeholder="Chercher une commande">
-    <p>Cliquer sur le nom de la colonne pour trier</p>
+    <p><small>Cliquer sur le nom de la colonne pour trier. </small>
+      <small class="clearfix">
+        <button class="info button tiny right"><i class="fa fa-plus-circle" aria-hidden="true"> Détails</i></button>
+        <button class="secondary button tiny"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
+        <button class="alert button tiny"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</button>
+      </small>
+    </p>
     <table width="100%">
       <thead>
         <tr>
@@ -20,16 +26,23 @@
       </thead>
         <tbody class="list">
           {% for order in orders  %}
-          <tr>
-            <td class="id">{{order.id}}</td>
-            <td class="date">{{order.dateCreated|date("d/m/Y")}}</td>
-            <td class="name">{{order.BsUsers.name}} {{order.BsUsers.surname}}</td>
-            <td class="state">{{order.BsStates.name}}</td>
-            <td>
-              <button class="secondary button small"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-              <button class="alert button small"><i class="fa fa-times" aria-hidden="true"></i></button>
-            </td>
-          </tr>
+            <tr>
+              <td class="id">{{order.id}}</td>
+              <td class="date">{{order.dateCreated|date("d/m/Y")}}</td>
+              <td class="name">{{order.BsUsers.name}} {{order.BsUsers.surname}}</td>
+              <td class="state">
+              {% if order.idState == 1 %}
+              <span class="warning label">{{order.BsStates.name}}</span>
+              {% else %}
+              <span class="success label">{{order.BsStates.name}}</span>
+              {% endif %}
+              </td>
+              <td>
+                <button class="button small"><span class="fa fa-plus-circle" aria-hidden="true"></span></button>
+                <button class="secondary button small"><span class="fa fa-pencil" aria-hidden="true"></span></button>
+                <button class="alert button small"><span class="fa fa-times" aria-hidden="true"></span></button>
+              </td>
+            </tr>
           {% endfor %}
         </tbody>
     </table>
@@ -44,11 +57,11 @@
 <script>
 /* Allows the user to order the table as it please and to search in it */
    var options = {
-    valueNames: [ 'id', 'name', 'category' ,'description', 'availability', 'price' ],
-    page: 5,
+    valueNames: [ 'id', 'date', 'name' ,'state'],
+    page: 10,
     plugins: [ ListPagination({}) ]
   };
-  var userList = new List('products', options);
+  var userList = new List('orders', options);
 </script>
 <script src="{{url('homepage')}}/public/js/paginationAutoStyle.js"></script>
 <script>paginationStyle()</script>

@@ -42,14 +42,14 @@ function connectAjax($data){
   //Takes  Id's and send them in the POST request.
   xhr.open('POST', path+'/user/connect/ajax', true);
 
-  // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
+  // We send a header to tell the server its an Ajax request
   xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest');
   xhr.send($data);
 
   //Check if request is OK
   xhr.onreadystatechange = function () {
 
-    //Ruest is done sending
+    //Request is done sending
     if (xhr.readyState === 4) {
       //Request is ok
       if (xhr.status === 200) {
@@ -57,7 +57,7 @@ function connectAjax($data){
           document.querySelector('#passwordError').innerHTML = "Connexion reussie, veuillez patienter";
           document.location.href= window.location.origin+''+window.location.pathname+'user/profile'
         }else{
-          document.querySelector('#passwordError').innerHTML = "Indentifiants incorrects, veuillez réesayer";
+          document.querySelector('#passwordError').innerHTML = "dentifiants incorrects, veuillez réesayer";
         }
       } else { //Not OK
 

@@ -1,9 +1,8 @@
 <?php
-use AuBoisDesSylves\Models;
 use AuBoisDesSylves\controllers\HomeController;
 use AuBoisDesSylves\controllers\UserController;
 use AuBoisDesSylves\controllers\AdminController;
-
+use AuBoisDesSylves\Propel\Models as Models;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -102,8 +101,6 @@ $app->get('/user/logout', function () use ($app){
     return $user->logoutAction();
 })->bind('logoutAction');
 
-
-
 /* ADMIN ROUTE **************************************/
 $app->get('/admin/users', function () use ($app){
     $admin = new AdminController($app);
@@ -114,6 +111,36 @@ $app->get('/admin/products', function () use ($app){
     $admin = new AdminController($app);
     return $admin->products();
 })->bind('adminProducts');
+
+//Get the infos for one product (for ajax form completion for example)
+$app->get('/admin/products/one/{id}', function($id) use ($app){
+  $admin = new AdminController($app);
+  return $admin->productGetOne($id);
+});
+
+//Delete a product
+/*
+$app->match('/admin/products/delete', function(Request $request) use ($app){
+
+  if($request->isMethod('post') && $app['session']->get('user')->getRank() == 0){
+    $product = Models\BsProductsQuery::create()->filterById($request->get('idDelete'))->findOne();
+    $product->delete();
+    return $app->redirect($app['url_generator']->generate('adminProducts'));
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
+})->bind('deleteProductAction');*/
+
+$app->match('/admin/products/update', function(Request $request) use ($app){
+  if($request->isMethod('post') && $app['session']->get('user')->getRank() == 0){
+    //check if user is admin
+      $product = new AdminController($app);
+      $response = $product->productsCreateAction($request);
+      //Erreur
+      return $app->redirect($app['url_generator']->generate('adminProducts'));
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
+  //Si ID est set alors on récupère le produit avec le même id et on edit, sinon on créer un nouveau.
+})->bind('editProductAction');
 
 $app->get('/admin/orders', function () use ($app){
     $admin = new AdminController($app);
