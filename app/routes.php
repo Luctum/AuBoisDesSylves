@@ -2,6 +2,7 @@
 use AuBoisDesSylves\controllers\HomeController;
 use AuBoisDesSylves\controllers\UserController;
 use AuBoisDesSylves\controllers\AdminController;
+use AuBoisDesSylves\controllers\ProductController;
 use AuBoisDesSylves\Propel\Models as Models;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -146,3 +147,16 @@ $app->get('/admin/orders', function () use ($app){
     $admin = new AdminController($app);
     return $admin->orders();
 })->bind('adminOrders');
+
+
+/*PRODUCTS ROUTE*/
+//display products
+$app->get('/products', function () use ($app){
+    $product = new ProductController($app);
+    return $product->index();
+})->bind('products');
+
+$app->get('/products/{categorie}', function ($categorie) use ($app) {
+    $home = new ProductController($app);
+    return $home->product($categorie);
+})->bind('product');

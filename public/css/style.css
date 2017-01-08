@@ -91,7 +91,8 @@ nav{
 	border-radius: 3px;
 	padding : 7px;
 	width: 230px;
-	height: 285px;
+	min-height: 290px;
+	max-width: 220px;
 	margin-bottom: 10px;
 	margin-right: 5px;
 	display: inline-block;
@@ -103,7 +104,7 @@ nav{
 		opacity: 0;
 		background-color: white;
 		position: absolute;
-		width: 220px;
+		width: 200px;
 		height: 220px;
 		font-size: smaller;
 }
@@ -116,6 +117,7 @@ nav{
 .orderCard img{
  margin-bottom: 7px;
  border: 1px solid rgb(71, 71, 71);
+ height: 210px;
 }
 
 .orderCard ul{
@@ -142,4 +144,13 @@ nav{
 
 .notOk{
 	background-color: rgb(208, 58, 32);
+}
+
+.top-accordion{
+	padding: 15px;
+	color: white;
+	background-color: #3c2222;
+	font-family: 'Bad Script', cursive;
+	font-size: larger;
+
 }

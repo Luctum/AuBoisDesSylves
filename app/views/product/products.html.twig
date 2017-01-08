@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+{% block title %} {{ parent() }} - Produits{% endblock %}
+{% block meta %}{{ parent() }}{% endblock %}
+{% block content %}
+    <div class="row">
+      <div class="medium-3 columns">
+        <strong>Tri de recherche</strong>
+
+      </div>
+      <div class="medium-9 columns">
+        {% for product in products %}
+         <div class="orderCard">
+           <div class="orderDetail">
+            <p> {{product.description|length > 250 ? product.description|slice(0, 250) ~ '...' : product.description}} </p>
+           </div>
+           <div class="orderOverview">
+             <img src="{{product.icon}}"/>
+             <p title="{{product.name}}">{{product.name|length > 28 ? product.name|slice(0, 25) ~ '...' : product.name}}</p>
+             <small class="totalOrder">{{product.price}}€</small>
+             <a class="status ok">Details</a>
+           </div>
+         </div>
+        {% endfor %}
+      </div>
+    </div>
+{% endblock %}
