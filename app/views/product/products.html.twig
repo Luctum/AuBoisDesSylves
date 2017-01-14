@@ -17,6 +17,7 @@
          	</div>
         {% endif %}
         {% for product in products %}
+        {% if product.availability == 1 %}
          <div class="orderCard">
            <div class="orderDetail">
             <p> {{product.description|length > 250 ? product.description|slice(0, 250) ~ '...' : product.description}} </p>
@@ -30,6 +31,7 @@
              {% endif %}
            </div>
          </div>
+         {% endif %}
         {% endfor %}
       </div>
     </div>
