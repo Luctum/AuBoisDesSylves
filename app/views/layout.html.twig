@@ -7,6 +7,7 @@
 		<link rel="stylesheet" href="{{ url('homepage') }}/public/css/style.css"/>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/checkConnect.js"></script>
 		<script type="text/javascript" src="{{ url('homepage') }}/public/js/userEdit.js"></script>
+
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="Description" content="Au Bois Des Sylves vous permet d'obtenir des objets et bijous en bois fait main">
 	</head>
@@ -84,7 +85,14 @@
 		</nav>
 	</div>
 	<div style="margin-top: 10px;">
-    {% block content %} {% endblock %}
+    {% block content %}
+				<div class="row">
+					<h3>Bienvenue Au Bois des Sylves !</h3>
+					<p>Notre boutique vous permet d'acheter des petits objets en bois comme des statues ou des colliers par exemple</p>
+					<p>Tous les objets sont fait sur mesure à la main et peuvent parfois prendre du temps pour être réalisé !</p>
+					<p>Vous pouvez accéder a nos produits en cliquant sur <i>Tous les produits</i> dans le menu au dessus, mais pour commander il faut vous inscrire en cliquant sur le petit personnage en haut a droite de votre écran !</p>
+				</div>
+	{% endblock %}
 	</div>
     <footer>
         <hr>
