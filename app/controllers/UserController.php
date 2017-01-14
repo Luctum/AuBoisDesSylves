@@ -58,6 +58,7 @@ class UserController extends BaseController{
       return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
     }
 
+  /* Shows the basket for the current user */
     public function basket(){
         if(null !== $this->getApp()['session']->get('user')){
           if(!empty($_COOKIE[$this->getApp()['session']->get('user')->getId()."basket"])){
@@ -80,6 +81,7 @@ class UserController extends BaseController{
           return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
     }
 
+  /* Clean the basket of an user and redirect to the basket */
     public function basketClean(){
       if(null !== $this->getApp()['session']->get('user')){
         setcookie("basket", '', time()-1000);
@@ -89,6 +91,7 @@ class UserController extends BaseController{
 
     }
 
+  /* Create an order with the content of the basket */
     public function basketPay(){
       if(null !== $this->getApp()['session']->get('user')){
         if(!empty($_COOKIE[$this->getApp()['session']->get('user')->getId()."basket"])){

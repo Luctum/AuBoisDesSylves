@@ -9,6 +9,8 @@ class AdminController extends BaseController{
     /*
     * Index of the admin-zone
     */
+    
+    /* user admin zone */
     public function users(){
       $users = Models\BsUsersQuery::create()->orderBySurname()->find();
       return $this->getApp()['twig']->render('admin/users.html.twig', array(
@@ -16,7 +18,7 @@ class AdminController extends BaseController{
         'users' => $users
       ));
     }
-
+  /* order admin zone */
     public function orders(){
       $orders = Models\BsOrdersQuery::create()
       ->orderById('desc')
@@ -29,6 +31,7 @@ class AdminController extends BaseController{
       ));
     }
 
+  /* Product admin zone */
     public function products(){
       $products = Models\BsProductsQuery::create()->orderById('desc')->find();
       return $this->getApp()['twig']->render('admin/products.html.twig', array(
@@ -37,6 +40,7 @@ class AdminController extends BaseController{
       ));
     }
 
+  /* edit the state of an order */
     public function orderEditState($id){
       $order = Models\BsOrdersQuery::create()->filterById($id)->findOne();
       switch($order->getIdState()){
@@ -50,6 +54,7 @@ class AdminController extends BaseController{
       $order->save();
     }
 
+  /* return the information of an order in json */
     public function orderGetOne($id){
       $order = Models\BsOrdersQuery::create()
       ->filterById($id)
@@ -57,12 +62,13 @@ class AdminController extends BaseController{
       return $order;
     }
 
+    /* return the information of a product in json */
     public function productGetOne($id){
       return Models\BsProductsQuery::create()->filterById($id)->findOne()->toJson();
     }
 
 
-
+    /* Create or Edit a Product */
     public function productsCreateAction($post){
 
       $name = $post->get('name');
