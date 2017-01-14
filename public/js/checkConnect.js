@@ -55,7 +55,7 @@ function connectAjax($data){
       if (xhr.status === 200) {
         if(xhr.responseText == 1){
           document.querySelector('#passwordError').innerHTML = "Connexion reussie, veuillez patienter";
-          document.location.href= window.location.origin+''+window.location.pathname+'user/profile'
+          document.location.href= path+'user/profile'
         }else{
           document.querySelector('#passwordError').innerHTML = "Identifiants incorrects, veuillez réesayer";
         }
