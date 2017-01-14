@@ -7,11 +7,11 @@ use AuBoisDesSylves\Propel\Models as Models;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-/*
+
 $app->error(function (\Exception $e) use ($app){
         $home = new HomeController($app);
         return $home->error();
-});*/
+});
 
 /* HOME ROUTE*************************************************************************************/
 //homepage
@@ -32,6 +32,27 @@ $app->get('/user/profile', function () use ($app){
     $user = new UserController($app);
     return $user->profile();
 })->bind('profile');
+
+//basket of the current user
+$app->get('/user/basket', function () use ($app){
+    $user = new UserController($app);
+    return $user->basket();
+})->bind('basket');
+
+
+//clean the basket
+$app->get('/user/basket/clean', function () use ($app){
+    $user = new UserController($app);
+    return $user->basketClean();
+})->bind('basketClean');
+
+//make an order
+$app->get('/user/basket/pay', function () use ($app){
+    $user = new UserController($app);
+    return $user->basketPay();
+})->bind('basketPay');
+
+
 
 /**
 * Connecting a user
@@ -104,22 +125,31 @@ $app->get('/user/logout', function () use ($app){
 
 /* ADMIN ROUTE **************************************/
 $app->get('/admin/users', function () use ($app){
+  if($app['session']->get('user')->getRank() == 0){
     $admin = new AdminController($app);
     return $admin->users();
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
 })->bind('adminUsers');
 
 $app->get('/admin/products', function () use ($app){
+  if($app['session']->get('user')->getRank() == 0){
     $admin = new AdminController($app);
     return $admin->products();
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
 })->bind('adminProducts');
 
 //Get the infos for one product (for ajax form completion for example)
 $app->get('/admin/products/one/{id}', function($id) use ($app){
-  $admin = new AdminController($app);
-  return $admin->productGetOne($id);
+  if($app['session']->get('user')->getRank() == 0){
+    $admin = new AdminController($app);
+    return $admin->productGetOne($id);
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
 });
 
-//Delete a product
+//Delete a product for later use
 /*
 $app->match('/admin/products/delete', function(Request $request) use ($app){
 
@@ -144,10 +174,31 @@ $app->match('/admin/products/update', function(Request $request) use ($app){
 })->bind('editProductAction');
 
 $app->get('/admin/orders', function () use ($app){
+  if($app['session']->get('user')->getRank() == 0){
     $admin = new AdminController($app);
     return $admin->orders();
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
 })->bind('adminOrders');
 
+//Get the infos for one product (for ajax form completion for example)
+$app->get('/admin/orders/one/{id}', function($id) use ($app){
+  if($app['session']->get('user')->getRank() == 0){
+    $admin = new AdminController($app);
+    return $admin->orderGetOne($id);
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
+});
+
+//Order Admin
+$app->match('/admin/orders/editState', function(Request $request) use ($app){
+  if($request->isMethod('post') && $app['session']->get('user')->getRank() == 0){
+    $admin = new AdminController($app);
+    $admin->orderEditState($request->get('idEdit'));
+    return $app->redirect($app['url_generator']->generate('adminOrders'));
+  }
+  return $app->redirect($app['url_generator']->generate('homepage'));
+})->bind('orderEditState');
 
 /*PRODUCTS ROUTE*/
 //display products
@@ -155,8 +206,3 @@ $app->get('/products', function () use ($app){
     $product = new ProductController($app);
     return $product->index();
 })->bind('products');
-
-$app->get('/products/{categorie}', function ($categorie) use ($app) {
-    $home = new ProductController($app);
-    return $home->product($categorie);
-})->bind('product');

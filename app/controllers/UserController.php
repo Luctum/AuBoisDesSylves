@@ -58,6 +58,61 @@ class UserController extends BaseController{
       return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
     }
 
+    public function basket(){
+        if(null !== $this->getApp()['session']->get('user')){
+          if(!empty($_COOKIE[$this->getApp()['session']->get('user')->getId()."basket"])){
+            $basketString = $_COOKIE[$this->getApp()['session']->get('user')->getId()."basket"];
+            $basket = explode("," , $basketString);
+            foreach(array_filter($basket) as $b){
+              $basketArray[] = Models\BsProductsQuery::create()->findOneById($b);
+            }
+          }else {
+            $basketArray = null;
+          }
+
+          if(null !== $this->getApp()['session']->get('user')){
+            return $this->getApp()['twig']->render('user/basket.html.twig', array(
+              'categories' => $this->getCategories(),
+              'basket' => $basketArray
+            ));
+          }
+        }
+          return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
+    }
+
+    public function basketClean(){
+      if(null !== $this->getApp()['session']->get('user')){
+        setcookie("basket", '', time()-1000);
+        return $this->getApp()->redirect($this->getApp()['url_generator']->generate('basket'));
+      }
+      return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
+
+    }
+
+    public function basketPay(){
+      if(null !== $this->getApp()['session']->get('user')){
+        if(!empty($_COOKIE[$this->getApp()['session']->get('user')->getId()."basket"])){
+          $basketString = $_COOKIE[$this->getApp()['session']->get('user')->getId()."basket"];
+          $basket = explode("," , $basketString);
+          $basket = array_filter($basket);
+        }
+
+        $order = new Models\BsOrders();
+        $order->setIdUser($this->getApp()['session']->get('user')->getId());
+        foreach($basket as $b){
+          if($b != 0 && $b != null){
+            $content = new Models\BsContents();
+            $content->setQuantity(1);
+            $content->setIdProduct($b);
+            $order->addBsContents($content);
+          }
+
+        }
+        $order->save();
+      }
+      return $this->getApp()->redirect($this->getApp()['url_generator']->generate('homepage'));
+    }
+
     /* Edit an User */
     public function editAction($post){
 

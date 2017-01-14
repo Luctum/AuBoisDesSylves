@@ -31,10 +31,12 @@
 				<div class="medium-5 columns"><img id="logoCerf" src="{{ url('homepage') }}/public/img/cerf.svg"><h4 id="headerText" class="displayInlineBlock badScriptFont">Au Bois des Sylves</h4>
 				</div>
 					<div class="medium-5 columns">
-						<ul class="menu">
-					        <li><input type="search" placeholder="Rechercher un produit ..."></li>
-					        <li><button type="button" class="darkBrown button"><i class="fa fa-search"></i></button></li>
+							<!--<form action="{{url('homepage')}}product/search" method="GET">
+							<ul class="menu">
+					        <li><input type="search" name="keyword" placeholder="Rechercher un produit ..."></li>
+					        <li><button type="submit" class="darkBrown button"><i class="fa fa-search"></i></button></li>
 						</ul>
+					</form>-->
 		  		</div>
 
 		  		<div class="large-2 columns">
@@ -62,9 +64,11 @@
 							<li><button class="darkBrown button" data-open="connectModal" data-toggle="user-menu-drop"><i class="fa fa-user"></i></button>
 							{% include 'connectModal.html.twig' %}
 						{% endif %}
+						{% if app.session.get('user') is not null %}
 						<li>
-							<button class="darkBrown button"><i class="fa fa-shopping-cart"></i></button>
+							<a href="{{url('basket')}}" style="margin:0; padding:0;"><button class="darkBrown button"><i class="fa fa-shopping-cart"></i></button></a>
 						</li>
+						{% endif %}
 					</ul>
 		  		</div>
 				</div><!-- EndRow -->
@@ -74,9 +78,7 @@
 			<div class="row">
 				<ul class="vertical medium-horizontal menu">
         <li><a href="{{url('homepage')}}">Accueil</a></li>
-				{% for category in categories %}
-					<li><a href="#">{{category.name}}</a></li>
-				{% endfor %}
+				<li><a href="{{url('products')}}">Tous les produits</a></li>
 				</ul>
 			</div>
 		</nav>

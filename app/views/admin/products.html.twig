@@ -3,6 +3,7 @@
 {% block title %} {{ parent() }} - Administration des produits{% endblock %}
 
 {% block content %}
+
 <div class="row">
   <h3>Administration des produits :</h3> <button class="darkBrown button" id="createButton" data-open="editModal" >Ajouter un produit</button>
   <div id="products">
@@ -43,7 +44,9 @@
             </td>
           </tr>
           {% endfor %}
+
         </tbody>
+
     </table>
     Pages : <ul class="pagination" style="display: inline-block;"></ul>
   </div>

@@ -9,8 +9,8 @@
     <input class="search" type="search" placeholder="Chercher une commande">
     <p><small>Cliquer sur le nom de la colonne pour trier. </small>
       <small class="clearfix">
-        <button class="info button tiny right"><i class="fa fa-plus-circle" aria-hidden="true"> Détails</i></button>
-        <button class="secondary button tiny"><i class="fa fa-pencil" aria-hidden="true"></i> Modifier</button>
+        <button class="info button tiny right" ><i class="fa fa-plus-circle" aria-hidden="true"> Détails</i></button>
+        <button class="secondary button tiny"><i class="fa fa-pencil" aria-hidden="true"></i> Changer d'etat</button>
         <button class="alert button tiny"><i class="fa fa-times" aria-hidden="true"></i> Supprimer</button>
       </small>
     </p>
@@ -28,7 +28,7 @@
           {% for order in orders  %}
             <tr>
               <td class="id">{{order.id}}</td>
-              <td class="date">{{order.dateCreated|date("d/m/Y")}}</td>
+              <td class="date">{{order.dateCreated|date("Y/m/d")}}</td>
               <td class="name">{{order.BsUsers.name}} {{order.BsUsers.surname}}</td>
               <td class="state">
               {% if order.idState == 1 %}
@@ -38,17 +38,55 @@
               {% endif %}
               </td>
               <td>
-                <button class="button small"><span class="fa fa-plus-circle" aria-hidden="true"></span></button>
-                <button class="secondary button small"><span class="fa fa-pencil" aria-hidden="true"></span></button>
+                <button class="button small"  id="seeButton" data-open="seeModal{{order.id}}" data-id-order="{{order.id}}"><span class="fa fa-plus-circle" aria-hidden="true"></span></button>
+                <form method="POST" action="{{url('orderEditState')}}"style=" display: inline-block">
+                  <input type="hidden" name="idEdit" value="{{order.id}}"/>
+                  <button type="submit "class="secondary button small"><span class="fa fa-pencil" aria-hidden="true"></span></button>
+                </form>
                 <button class="alert button small"><span class="fa fa-times" aria-hidden="true"></span></button>
               </td>
             </tr>
+            <!-- Modal for details -->
+            <div class="reveal" data-animation-in="fade-in" data-animation-out="fade-out fast" id="seeModal{{order.id}}" aria-labelledby="Details d'une commande" data-reveal>
+              <h3>Details de la commande</h3>
+              <hr/>
+              <h5>Date de commande</h5>
+              <p>{{order.dateCreated|date("d/m/Y")}}</p>
+              <h5>Detail de l'acheteur</h5>
+              <ul class="vcard">
+                <li class="fn">{{order.BsUsers.surname|upper }} {{order.BsUsers.name}}</li>
+                <li>{{order.BsUsers.address}}</li>
+                <li>{{order.BsUsers.city}}</li>
+                <li>{{order.BsUsers.postalCode}}</li>
+                <li class="email"><a href="mailto:{{order.BsUsers.mail}}">{{order.BsUsers.mail}}</a></li>
+              </ul>
+              <h5>Produits</h5>
+              <ol>
+                {% set total = 0 %}
+                {% for content in order.BsContentss %}
+                  {% set total = total + content.quantity * content.BsProducts.price %}
+                  {% set image = content.BsProducts.icon %}
+                  <li>
+                    {{content.BsProducts.name}} ({{content.BsProducts.price}}€) x{{content.quantity}}
+                  </li>
+                {% endfor %}
+              </ol>
+              <h5>Total</h5>
+              <p>{{total}}€</p>
+              <h5></h5>
+              <p></p>
+              <button class="close-button" data-close aria-label="Close reveal" type="button">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           {% endfor %}
         </tbody>
     </table>
     Pages : <ul class="pagination" style="display: inline-block;"></ul>
   </div>
 </div>
+<!-- See Details -->
+
 {% endblock %}
 
 {% block JS %}

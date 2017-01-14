@@ -1,0 +1,44 @@
+{% extends "layout.html.twig" %}
+{% block title %} {{ parent() }} - Panier{% endblock %}
+{% block meta %}{{ parent() }}{% endblock %}
+{% block content %}
+{% set total = 0 %}
+    <div class="row">
+      <h3>Mon panier : </h3>
+      {% if basket is not null %}
+      <table width="100%">
+        <thead>
+            <tr>
+              <th></th>
+              <th class="sort" data-sort="name">Nom</th>
+              <th class="sort" data-sort="description">Description</th>
+              <th class="sort" data-sort="category">Catégorie</th>
+              <th class="sort" data-sort="price">Prix</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+          {% for product in basket %}
+            {% if product is not empty %}
+            {% set total = total + product.price %}
+            <tr>
+              <td><img src="{{product.icon}}" width="50px" ></img></td>
+              <td class="name">{{product.name}}</td>
+              <td class="description" title="{{product.description}}"><small>{{product.description|slice(0, 50)}}...</small></td>
+              <td class="category">{{product.BsCategories.name}}</td>
+              <td class="price">{{product.price}}€</td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+            <tr style="background-color: #f8f8f8;"><td colspan="3"></td><td><b>TOTAL</b></td><td><b>{{total}}€</b></td></tr>
+         </tbody>
+      </table>
+      <a href="{{url('basketPay')}}"><button class="warning button">Commander</button></a> <a href="{{url('basketClean')}}" onclick="eraseCookie('{{app.session.get('user').id}}basket')"><button class="alert button">Vider mon panier</button></a>
+        {% else %}
+        <h4>Votre panier est vide ! :( </h4>
+        <p>Pour commander des articles, cliquez sur 'Ajouter au panier' dans 'Tous les produits' !</p>
+      {% endif %}
+    </div>
+{% endblock %}
+{% block JS %}
+<script src="{{url('homepage')}}/public/js/basket.js"></script>
+{% endblock %}

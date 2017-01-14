@@ -57,7 +57,7 @@ function connectAjax($data){
           document.querySelector('#passwordError').innerHTML = "Connexion reussie, veuillez patienter";
           document.location.href= window.location.origin+''+window.location.pathname+'user/profile'
         }else{
-          document.querySelector('#passwordError').innerHTML = "dentifiants incorrects, veuillez réesayer";
+          document.querySelector('#passwordError').innerHTML = "Identifiants incorrects, veuillez réesayer";
         }
       } else { //Not OK
 

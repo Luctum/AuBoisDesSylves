@@ -37,13 +37,31 @@ class AdminController extends BaseController{
       ));
     }
 
-    public function productsDeleteAction($post){
+    public function orderEditState($id){
+      $order = Models\BsOrdersQuery::create()->filterById($id)->findOne();
+      switch($order->getIdState()){
+        case 1 :
+            $order->setIdState(2);
+          break;
+        case 2 :
+            $order->setIdState(1);
+          break;
+      }
+      $order->save();
+    }
 
+    public function orderGetOne($id){
+      $order = Models\BsOrdersQuery::create()
+      ->filterById($id)
+      ->find()->populateRelation('BsContents')->toJson();
+      return $order;
     }
 
     public function productGetOne($id){
       return Models\BsProductsQuery::create()->filterById($id)->findOne()->toJson();
     }
+
+
 
     public function productsCreateAction($post){
 
