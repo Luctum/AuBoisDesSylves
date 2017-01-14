@@ -5,7 +5,8 @@
         "propel/propel-service-provider-2": "dev-master",
         "twig/twig": "^1.28",
         "symfony/twig-bridge": "^3.1",
-        "symfony/form": "^3.2"
+        "symfony/form": "^3.2",
+        "ext-mysql": "*"
     },
   "autoload": {
     "psr-4": { "AuBoisDesSylves\\": "app/" }
