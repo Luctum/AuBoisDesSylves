@@ -1,6 +1,6 @@
 $(document).foundation()
 
-var path = window.location.origin+'/AuBoisDesSylves';
+var path = window.location.origin;
 
 
 function getHttpRequest() {
